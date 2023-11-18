@@ -3,6 +3,7 @@ import {
   widthPercentageToDP as w,
   heightPercentageToDP as h,
 } from "react-native-responsive-screen";
+import { RFValue } from "react-native-responsive-fontsize";
 
 import COLORS from "../../common/constants/colors";
 
@@ -40,7 +41,7 @@ const style = StyleSheet.create({
   },
 
   title: {
-    fontSize: 18,
+    fontSize: RFValue(12.5),
     fontStyle: "normal",
     lineHeight: 26,
   },

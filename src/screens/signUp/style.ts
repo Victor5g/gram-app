@@ -11,48 +11,62 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    paddingTop: 90,
+    paddingTop: 16,
     alignItems: "center",
     backgroundColor: COLORS.white,
   },
-  illustration: {
-    width: w(40),
-    height: h(10),
-  },
-  welcomeBox: {
+  header: {
+    width: w(100),
+    height: h(5),
+    alignItems: "flex-start",
     justifyContent: "center",
-    flexDirection: "row",
-    gap: 8,
-    marginTop: 34,
+    paddingLeft: 10,
   },
-  labelWelcome: {
-    fontSize: RFValue(25),
+  contentBackAction: {
+    alignItems: "center",
+    justifyContent: "center",
+    width: w(10),
+    height: h(5),
+  },
+  title: {
+    fontSize: RFValue(18),
     fontStyle: "normal",
     fontWeight: "600",
     color: COLORS.primaryBlack,
+    marginBottom: 9,
   },
-  labelAppName: {
-    color: COLORS.secondary,
+  illustration: {
+    width: w(55),
+    height: h(25),
+  },
+  labelDescription: {
+    fontSize: RFValue(12),
+    fontStyle: "normal",
+    fontWeight: "500",
+    lineHeight: 15,
+    color: COLORS.quickSilver,
+    width: w(70),
+    textAlign: "center",
   },
   form: {
     marginTop: 30,
     width: "95%",
     gap: 23,
   },
-  conentSignUp: {
+  conentHere: {
     marginTop: 30,
     width: "100%",
     justifyContent: "center",
     flexDirection: "row",
     gap: 3,
   },
-  labelSingUp: {
+  labelHere: {
     fontSize: RFValue(12),
     fontStyle: "normal",
     fontWeight: "500",
     lineHeight: 15,
   },
-  colorSingUp: {
+  colorHere: {
     color: COLORS.quickSilver,
   },
   colorAction: {

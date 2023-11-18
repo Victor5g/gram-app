@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { RFValue } from "react-native-responsive-fontsize";
 
 import COLORS from "../../common/constants/colors";
 
@@ -14,7 +15,7 @@ const style = StyleSheet.create({
   input: {
     flex: 1,
     minHeight: 34,
-    fontSize: 17,
+    fontSize: RFValue(12.5),
   },
   eyeIcon: {
     padding: 5,

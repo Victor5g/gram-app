@@ -5,9 +5,10 @@ import {
   NavigationProp,
 } from "@react-navigation/native";
 
-import { SingInViewModel } from "./model";
+import { SingUpViewModel } from "./model";
 
-const useSingInViewModel = (): SingInViewModel => {
+const useSingUpViewModel = (): SingUpViewModel => {
+  const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -23,14 +24,16 @@ const useSingInViewModel = (): SingInViewModel => {
   };
 
   return {
+    name,
     email,
     password,
-    isLoading,
+    setName,
     setEmail,
     setPassword,
+    isLoading,
     onSubmit,
     gotToScreen,
   };
 };
 
-export default useSingInViewModel;
+export default useSingUpViewModel;

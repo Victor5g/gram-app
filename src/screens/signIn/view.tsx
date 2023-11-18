@@ -9,7 +9,11 @@ import Button from "../../components/button";
 
 import style from "./style";
 
+import useSingInViewModel from "./view.model";
+
 const SingInView = () => {
+  const { gotToScreen } = useSingInViewModel();
+
   return (
     <SafeAreaWrapper>
       <View style={style.container}>
@@ -39,7 +43,7 @@ const SingInView = () => {
           </Text>
           <Text
             style={[style.labelSingUp, style.colorAction]}
-            onPress={() => console.log("Touched")}
+            onPress={() => gotToScreen("SignUp")}
           >
             {"Sign up"}
           </Text>
