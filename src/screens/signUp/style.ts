@@ -12,8 +12,7 @@ const style = StyleSheet.create({
     flex: 1,
     padding: 16,
     paddingTop: 16,
-    alignItems: "center",
-    backgroundColor: COLORS.white,
+    alignItems: "center"
   },
   header: {
     width: w(100),
