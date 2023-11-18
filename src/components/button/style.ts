@@ -4,7 +4,7 @@ import {
   heightPercentageToDP as h,
 } from "react-native-responsive-screen";
 
-import COLORS from "../../constants/colors";
+import COLORS from "../../common/constants/colors";
 
 const style = StyleSheet.create({
   container: {
