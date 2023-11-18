@@ -1,6 +1,6 @@
 import { Fragment } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import Routes from "./routers/app.routes";
+import Routes from "./routes/app.routes";
 
 export default function App() {
   return (
