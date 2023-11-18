@@ -26,8 +26,12 @@ const SingInView = () => {
           <Input inputype={"text"} placeholder="E-mail" />
           <Input inputype={"password"} placeholder="Password" />
 
-          <Button title={"Sign In"} typeButton={"simple"} />
-          <Button title={"Sign Up with Google"} typeButton={"social"} />
+          <Button title={"Sign In"} typeButton={"simple"} loading={false} />
+          <Button
+            title={"Sign Up with Google"}
+            typeButton={"social"}
+            loading={false}
+          />
         </View>
         <View style={style.conentSignUp}>
           <Text style={[style.labelSingUp, style.colorSingUp]}>

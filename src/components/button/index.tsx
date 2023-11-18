@@ -4,31 +4,46 @@ import { PropsButton } from "./interface";
 
 import IconGoogle from "../../assets/google-icon.svg";
 
-import style from "./style";
+import Loading from "../loading";
 
-const Button = ({ title, typeButton = "simple", ...rest }: PropsButton) => {
-  let adaptiveStyle = {
-    ...style.container,
-    ...(typeButton === "social"
-      ? { ...style.buttonSocial }
-      : { ...style.buttonSimple }),
-  };
+import style from "./style";
+import COLORS from "../../common/constants/colors";
+
+const Button = ({
+  title,
+  typeButton = "simple",
+  loading = false,
+  ...rest
+}: PropsButton) => {
   return (
-    <TouchableOpacity {...rest} style={adaptiveStyle}>
-      {typeButton === "simple" && (
-        <Text style={[style.title, style.simpleTitle]}>{title}</Text>
-      )}
-      {typeButton === "social" && (
-        <>
+    <TouchableOpacity
+      {...rest}
+      style={[
+        style.container,
+        typeButton === "social" ? style.buttonSocial : style.buttonSimple,
+      ]}
+    >
+      <Loading
+        loading={loading}
+        customColor={typeButton === "social" ? COLORS.black : COLORS.white}
+      >
+        {typeButton === "social" && (
           <View style={style.contentSocialIcon}>
             <IconGoogle
               width={style.socialIcon.width}
               height={style.socialIcon.height}
             />
           </View>
-          <Text style={[style.title, style.socialTitle]}>{title}</Text>
-        </>
-      )}
+        )}
+        <Text
+          style={[
+            style.title,
+            typeButton === "social" ? style.socialTitle : style.simpleTitle,
+          ]}
+        >
+          {title}
+        </Text>
+      </Loading>
     </TouchableOpacity>
   );
 };
