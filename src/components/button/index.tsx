@@ -1,6 +1,6 @@
 import { TouchableOpacity, Text, View } from "react-native";
 
-import { PropsButton } from "./type";
+import { PropsButton } from "./interface";
 
 import IconGoogle from "../../assets/google-icon.svg";
 

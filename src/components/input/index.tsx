@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { View, TextInput, TouchableOpacity } from "react-native";
 
-import { PropsInput } from "./type";
+import { PropsInput } from "./interface";
 
 import { Ionicons } from "@expo/vector-icons";
 

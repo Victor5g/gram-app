@@ -1,7 +1,7 @@
 import React from "react";
 import { SafeAreaView } from "react-native";
 
-import { SafeAreaWrapperProps } from "./type";
+import { SafeAreaWrapperProps } from "./interface";
 
 import style from "./style";
 
