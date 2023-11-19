@@ -14,7 +14,7 @@ const FeedView = () => {
           <Image
             style={style.imageProfile}
             source={{
-              uri: "https://reactnative.dev/img/tiny_logo.png",
+              uri: "https://avatars.githubusercontent.com/u/51713169?v=4",
             }}
           />
         </View>

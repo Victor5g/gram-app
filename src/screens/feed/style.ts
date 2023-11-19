@@ -1,5 +1,6 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
+
 import {
   widthPercentageToDP as w,
   heightPercentageToDP as h,
@@ -28,7 +29,7 @@ const style = StyleSheet.create({
   },
   imageProfile: {
     width: w(13),
-    height: h(6),
+    height: h(Platform.OS === "ios" ? 6 : 6.5),
     borderRadius: 100,
   },
 });
