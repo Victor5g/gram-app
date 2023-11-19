@@ -5,6 +5,7 @@ const { Navigator, Screen } = createNativeStackNavigator();
 
 import SingInView from "../screens/signIn/view";
 import SingUpView from "../screens/signUp/view";
+import Home from "./app.tab.routes";
 
 const Routes = () => {
   return (
@@ -15,6 +16,7 @@ const Routes = () => {
       >
         <Screen name="SignIn" component={SingInView} />
         <Screen name="SignUp" component={SingUpView} />
+        <Screen name="Home" component={Home} />
       </Navigator>
     </NavigationContainer>
   );

@@ -5,7 +5,8 @@ const COLORS = {
   white: "#FFFFFF",
   black: "#000000",
   lightGray: "#F4F4F4",
-  quickSilver: "#A0A0A0"
+  quickSilver: "#A0A0A0",
+  chineseSilver: "#CCCCCC",
 };
 
 export default COLORS;

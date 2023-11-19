@@ -30,7 +30,12 @@ const SingInView = () => {
           <Input inputype={"text"} placeholder="E-mail" />
           <Input inputype={"password"} placeholder="Password" />
 
-          <Button title={"Sign In"} typeButton={"simple"} loading={false} />
+          <Button
+            title={"Sign In"}
+            typeButton={"simple"}
+            loading={false}
+            onPress={() => gotToScreen("Home")}
+          />
           <Button
             title={"Sign Up with Google"}
             typeButton={"social"}
