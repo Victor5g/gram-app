@@ -1,4 +1,3 @@
-import { Text } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import { Entypo, FontAwesome, Ionicons } from "@expo/vector-icons";
@@ -7,39 +6,32 @@ import Feed from "../screens/feed/view";
 import Media from "../screens/media/view";
 import Profile from "../screens/profile/view";
 
-import style from "./style.tab.routes";
+import COLORS from "../common/constants/colors";
 
 const { Navigator, Screen } = createBottomTabNavigator();
-
-const tabInFocus = (focused: boolean) => {
-  return focused ? style.tabInFocus.color : style.unfocusedTab.color;
-};
 
 const Tab = () => {
   return (
     <Navigator
       screenOptions={{
         headerShown: false,
-        tabBarStyle: style.barStyle,
-        tabBarItemStyle: style.barItemStyle,
-        tabBarLabel: ({ focused, children }) => (
-          <Text
-            style={{
-              color: tabInFocus(focused),
-              ...style.barLabel,
-            }}
-          >
-            {children}
-          </Text>
-        ),
+        tabBarLabelStyle: {
+          fontSize: 12,
+        },
+        tabBarStyle: {
+          backgroundColor: COLORS.primary,
+          borderTopColor: "transparent",
+        },
+        tabBarActiveTintColor: COLORS.white,
+        tabBarInactiveTintColor: COLORS.chineseSilver,
       }}
     >
       <Screen
         name="Feed"
         component={Feed}
         options={{
-          tabBarIcon: ({ focused }) => (
-            <Entypo name="home" size={24} color={tabInFocus(focused)} />
+          tabBarIcon: ({ size, color }) => (
+            <Entypo name="home" size={size} color={color} />
           ),
         }}
       />
@@ -47,12 +39,8 @@ const Tab = () => {
         name="Media"
         component={Media}
         options={{
-          tabBarIcon: ({ focused }) => (
-            <Ionicons
-              name="add-circle-sharp"
-              size={30}
-              color={tabInFocus(focused)}
-            />
+          tabBarIcon: ({ size, color }) => (
+            <Ionicons name="add-circle-sharp" size={size + 5} color={color} />
           ),
         }}
       />
@@ -60,8 +48,8 @@ const Tab = () => {
         name="Profile"
         component={Profile}
         options={{
-          tabBarIcon: ({ focused }) => (
-            <FontAwesome name="user" size={24} color={tabInFocus(focused)} />
+          tabBarIcon: ({ size, color }) => (
+            <FontAwesome name="user" size={size} color={color} />
           ),
         }}
       />

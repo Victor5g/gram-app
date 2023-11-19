@@ -9,7 +9,6 @@ const FeedView = () => {
   return (
     <SafeAreaWrapper>
       <View style={style.container}>
-
         <View style={style.header}>
           <Text style={style.title}>{"Feeds"}</Text>
           <Image
