@@ -16,15 +16,16 @@ export const authenticateUser = async (email: string, password: string) => {
 
 export const createUser = async (fullName:string, email: string, password: string) => {
   try {
-    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const defaultPhoto = `https://ui-avatars.com/api/?name=${fullName}&length=1&background=${COLORS.secondary.replace('#','')}`;
 
-    const userProfile = await updateProfile(userCredential.user, {
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+
+    await updateProfile(userCredential.user, {
       displayName: fullName,
       photoURL: defaultPhoto
     });
 
-    return { created: true, data: { userCredential, userProfile } };
+    return { created: true };
   } catch (error) {
     return { created: false, data: Errors[error.code] };
   }
