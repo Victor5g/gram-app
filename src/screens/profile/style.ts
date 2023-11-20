@@ -12,9 +12,16 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
   },
+  header: { 
+    width: "90%", 
+    alignItems: "flex-end" 
+  },
   body: {
     width: "100%",
     alignItems: "center",
+  },
+  logoutButton: {
+    padding: 9,
   },
   contentImage: {
     width: w(40),

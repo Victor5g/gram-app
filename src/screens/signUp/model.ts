@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
-export interface SingUpViewModel {
+export interface SignUpViewModel {
   name: string;
   email: string;
   password: string;
@@ -8,6 +8,7 @@ export interface SingUpViewModel {
   setEmail: Dispatch<SetStateAction<string>>;
   setPassword: Dispatch<SetStateAction<string>>;
   isLoading: boolean;
-  onSubmit: () => void;
+  enableSignUp: boolean,
+  handleSignUp: () => void;
   gotToScreen: (nameScreen: string)=> void;
 };

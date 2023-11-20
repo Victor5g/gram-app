@@ -1,22 +1,43 @@
+import { useState, useEffect } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
+import { auth } from "../repositories/firebase.client";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
-import SingInView from "../screens/signIn/view";
-import SingUpView from "../screens/signUp/view";
+import SignInView from "../screens/signIn/view";
+import SignUpView from "../screens/signUp/view";
 import Home from "./app.tab.routes";
+import Loading from "../components/loading";
 
 const Routes = () => {
-  return (
+  const [user, setUser] = useState<any>(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const event = auth.onAuthStateChanged((user) => {
+      setUser(user);
+      setLoading && setLoading(false);
+    });
+    return event;
+  }, []);
+
+  return loading ? (
+    <Loading loading={true} />
+  ) : (
     <NavigationContainer>
       <Navigator
         screenOptions={{ headerShown: false }}
-        initialRouteName="SignIn"
+        initialRouteName={user ? "Home" : "SignIn"}
       >
-        <Screen name="SignIn" component={SingInView} />
-        <Screen name="SignUp" component={SingUpView} />
-        <Screen name="Home" component={Home} />
+        {user ? (
+          <Screen name="Home" component={Home} />
+        ) : (
+          <>
+            <Screen name="SignIn" component={SignInView} />
+            <Screen name="SignUp" component={SignUpView} />
+          </>
+        )}
       </Navigator>
     </NavigationContainer>
   );

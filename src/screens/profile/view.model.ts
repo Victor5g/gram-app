@@ -1,13 +1,15 @@
-
 import { ProfileViewModel } from "./model";
 
-const useSingInViewModel = (): ProfileViewModel => {
+import { closeUserSession } from "../../repositories/auth.repository";
 
-
+const useProfileViewModel = (): ProfileViewModel => {
+  const handleSignOut = () => {
+    closeUserSession();
+  };
 
   return {
-
+    handleSignOut,
   };
 };
 
-export default useSingInViewModel;
+export default useProfileViewModel;

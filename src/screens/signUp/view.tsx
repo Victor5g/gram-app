@@ -10,10 +10,21 @@ import Button from "../../components/button";
 
 import style from "./style";
 
-import useSingUpViewModel from "./view.model";
+import useSignUpViewModel from "./view.model";
 
-const SingUpView = () => {
-  const { gotToScreen } = useSingUpViewModel();
+const SignUpView = () => {
+  const {
+    name,
+    email,
+    password,
+    setPassword,
+    setName,
+    setEmail,
+    isLoading,
+    handleSignUp,
+    gotToScreen,
+    enableSignUp
+  } = useSignUpViewModel();
 
   return (
     <SafeAreaWrapper>
@@ -39,14 +50,31 @@ const SingUpView = () => {
         </Text>
 
         <View style={style.form}>
-          <Input inputype={"text"} placeholder="Name" />
-          <Input inputype={"text"} placeholder="E-mail" />
-          <Input inputype={"password"} placeholder="Password" />
+          <Input
+            inputype={"text"}
+            placeholder="Name"
+            value={name}
+            onChangeText={setName}
+          />
+          <Input
+            inputype={"text"}
+            placeholder="E-mail"
+            value={email}
+            onChangeText={setEmail}
+          />
+          <Input
+            inputype={"password"}
+            placeholder="Password"
+            value={password}
+            onChangeText={setPassword}
+          />
 
           <Button
             title={"Create Account"}
             typeButton={"simple"}
-            loading={false}
+            loading={isLoading}
+            onPress={handleSignUp}
+            disabled={!enableSignUp}
           />
         </View>
 
@@ -66,4 +94,4 @@ const SingUpView = () => {
   );
 };
 
-export default SingUpView;
+export default SignUpView;

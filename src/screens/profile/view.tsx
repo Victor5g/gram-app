@@ -1,9 +1,21 @@
 import React from "react";
-import { Text, ScrollView, View, Image, FlatList } from "react-native";
+import {
+  Text,
+  ScrollView,
+  View,
+  Image,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
+
+import { AntDesign } from "@expo/vector-icons";
 
 import SafeAreaWrapper from "../../components/safeAreaWrapper";
 
+import useProfileViewModel from "./view.model";
+
 import style from "./style";
+import COLORS from "../../common/constants/colors";
 
 const ProfileView = () => {
   const array = [
@@ -12,6 +24,8 @@ const ProfileView = () => {
     { id: "3", name: "Cruz Ramirez" },
     { id: "4", name: "Cruz Ramirez" },
   ];
+
+  const { handleSignOut } = useProfileViewModel();
 
   return (
     <SafeAreaWrapper>
@@ -23,6 +37,14 @@ const ProfileView = () => {
         }}
       >
         <View style={style.body}>
+          <View style={style.header}>
+            <TouchableOpacity
+              style={style.logoutButton}
+              onPress={handleSignOut}
+            >
+              <AntDesign name="logout" size={30} color={COLORS.primaryBlack} />
+            </TouchableOpacity>
+          </View>
           <View style={style.contentImage}>
             <Image
               style={style.imageProfile}

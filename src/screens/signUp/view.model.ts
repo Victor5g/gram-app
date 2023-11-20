@@ -1,27 +1,61 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   useNavigation,
   ParamListBase,
   NavigationProp,
 } from "@react-navigation/native";
 
-import { SingUpViewModel } from "./model";
+import { SignUpViewModel } from "./model";
 
-const useSingUpViewModel = (): SingUpViewModel => {
+import { createUser } from "../../repositories/auth.repository";
+import { Alert } from "react-native";
+
+const useSignUpViewModel = (): SignUpViewModel => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [enableSignUp, setEnableSignUp] = useState<boolean>(false);
 
   const navigation: NavigationProp<ParamListBase> = useNavigation();
 
-  const onSubmit = async () => {
-    console.log("Executed");
+  const handleSignUp = async () => {
+    try {
+      setIsLoading(true);
+      let instance = await createUser(name, email, password);
+      if (!instance.created) {
+        if (instance.data) {
+          Alert.alert(instance.data);
+        } else {
+          throw new Error();
+        }
+        return;
+      }
+    } catch {
+      Alert.alert(
+        "SignUp",
+        "Error during registration, please try again later."
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const validField = () => {
+    if (name.length > 1 && email.includes("@") && password.length > 1) {
+      setEnableSignUp(true);
+    } else {
+      setEnableSignUp(false);
+    }
   };
 
   const gotToScreen = (nameScreen: string) => {
     navigation.navigate(nameScreen);
   };
+
+  useEffect(() => {
+    validField();
+  }, [name, email, password]);
 
   return {
     name,
@@ -31,9 +65,10 @@ const useSingUpViewModel = (): SingUpViewModel => {
     setEmail,
     setPassword,
     isLoading,
-    onSubmit,
+    enableSignUp,
+    handleSignUp,
     gotToScreen,
   };
 };
 
-export default useSingUpViewModel;
+export default useSignUpViewModel;

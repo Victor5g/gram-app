@@ -9,10 +9,20 @@ import Button from "../../components/button";
 
 import style from "./style";
 
-import useSingInViewModel from "./view.model";
+import useSignInViewModel from "./view.model";
 
-const SingInView = () => {
-  const { gotToScreen } = useSingInViewModel();
+const SignInView = () => {
+  const {
+    email,
+    password,
+    isLoading,
+    enableSignIn,
+    setEmail,
+    setPassword,
+    validField,
+    gotToScreen,
+    handleSignIn,
+  } = useSignInViewModel();
 
   return (
     <SafeAreaWrapper>
@@ -27,14 +37,25 @@ const SingInView = () => {
         </View>
 
         <View style={style.form}>
-          <Input inputype={"text"} placeholder="E-mail" />
-          <Input inputype={"password"} placeholder="Password" />
+          <Input
+            inputype={"text"}
+            placeholder="E-mail"
+            value={email}
+            onChangeText={setEmail}
+          />
+          <Input
+            inputype={"password"}
+            placeholder="Password"
+            value={password}
+            onChangeText={setPassword}
+          />
 
           <Button
             title={"Sign In"}
             typeButton={"simple"}
-            loading={false}
-            onPress={() => gotToScreen("Home")}
+            loading={isLoading}
+            disabled={!enableSignIn}
+            onPress={handleSignIn}
           />
           <Button
             title={"Sign Up with Google"}
@@ -43,20 +64,20 @@ const SingInView = () => {
           />
         </View>
         <View style={style.conentSignUp}>
-          <Text style={[style.labelSingUp, style.colorSingUp]}>
+          <Text style={[style.labelSignUp, style.colorSignUp]}>
             {"Don’t have an account?"}
           </Text>
           <Text
-            style={[style.labelSingUp, style.colorAction]}
+            style={[style.labelSignUp, style.colorAction]}
             onPress={() => gotToScreen("SignUp")}
           >
             {"Sign up"}
           </Text>
-          <Text style={[style.labelSingUp, style.colorSingUp]}>{"here"}</Text>
+          <Text style={[style.labelSignUp, style.colorSignUp]}>{"here"}</Text>
         </View>
       </View>
     </SafeAreaWrapper>
   );
 };
 
-export default SingInView;
+export default SignInView;

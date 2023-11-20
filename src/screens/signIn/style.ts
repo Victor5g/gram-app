@@ -45,13 +45,13 @@ const style = StyleSheet.create({
     flexDirection: "row",
     gap: 3,
   },
-  labelSingUp: {
+  labelSignUp: {
     fontSize: RFValue(12),
     fontStyle: "normal",
     fontWeight: "500",
     lineHeight: 15,
   },
-  colorSingUp: {
+  colorSignUp: {
     color: COLORS.quickSilver,
   },
   colorAction: {
