@@ -3,8 +3,7 @@ import { signInWithEmailAndPassword, createUserWithEmailAndPassword, updateProfi
 import { Errors } from "../common/constants/erros";
 
 import { auth } from "./firebase.client";
-
-const defaultProfilePhoto = "https://i.pravatar.cc/";
+import COLORS from "../common/constants/colors";
 
 export const authenticateUser = async (email: string, password: string) => {
   try {
@@ -18,10 +17,11 @@ export const authenticateUser = async (email: string, password: string) => {
 export const createUser = async (fullName:string, email: string, password: string) => {
   try {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-  
+    const defaultPhoto = `https://ui-avatars.com/api/?name=${fullName}&length=1&background=${COLORS.secondary.replace('#','')}`;
+
     const userProfile = await updateProfile(userCredential.user, {
       displayName: fullName,
-      photoURL:defaultProfilePhoto
+      photoURL: defaultPhoto
     });
 
     return { created: true, data: { userCredential, userProfile } };
