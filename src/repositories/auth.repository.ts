@@ -4,7 +4,7 @@ import { Errors } from "../common/constants/erros";
 
 import { auth } from "./firebase.client";
 
-const defaultProfilePhoto = "https://avatars.githubusercontent.com/u/51713169?s=96&v=4";
+const defaultProfilePhoto = "https://i.pravatar.cc/";
 
 export const authenticateUser = async (email: string, password: string) => {
   try {

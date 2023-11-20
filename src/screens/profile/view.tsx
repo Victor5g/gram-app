@@ -11,6 +11,7 @@ import {
 import { AntDesign } from "@expo/vector-icons";
 
 import SafeAreaWrapper from "../../components/safeAreaWrapper";
+import Loading from "../../components/loading";
 
 import useProfileViewModel from "./view.model";
 
@@ -18,14 +19,7 @@ import style from "./style";
 import COLORS from "../../common/constants/colors";
 
 const ProfileView = () => {
-  const array = [
-    { id: "1", name: "Cruz Ramirez" },
-    { id: "2", name: "Cruz Ramirez" },
-    { id: "3", name: "Cruz Ramirez" },
-    { id: "4", name: "Cruz Ramirez" },
-  ];
-
-  const { handleSignOut } = useProfileViewModel();
+  const { name, followers, followings, userURL, posts, handleSignOut } = useProfileViewModel();
 
   return (
     <SafeAreaWrapper>
@@ -46,31 +40,33 @@ const ProfileView = () => {
             </TouchableOpacity>
           </View>
           <View style={style.contentImage}>
-            <Image
-              style={style.imageProfile}
-              source={{
-                uri: "https://avatars.githubusercontent.com/u/51713169?v=4",
-              }}
-            />
+            <Loading loading={userURL.length == 0}>
+              <Image
+                style={style.imageProfile}
+                source={{
+                  uri: userURL,
+                }}
+              />
+            </Loading>
           </View>
 
-          <Text style={style.labelUserName}>{"Victor5g"}</Text>
+          <Text style={style.labelUserName}>{name}</Text>
 
           <View style={style.boxInfo}>
             <View style={style.contentInfo}>
-              <Text style={style.labelValue}>{"980M"}</Text>
+              <Text style={style.labelValue}>{followers}</Text>
               <Text style={style.labelInfo}>{"Followers"}</Text>
             </View>
 
             <View style={style.contentInfo}>
-              <Text style={style.labelValue}>{"2k"}</Text>
+              <Text style={style.labelValue}>{followings}</Text>
               <Text style={style.labelInfo}>{"following"}</Text>
             </View>
           </View>
 
           <View style={style.sent}>
             <FlatList
-              data={array}
+              data={posts}
               numColumns={3}
               scrollEnabled={false}
               renderItem={({ item }) => (
