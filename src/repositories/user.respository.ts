@@ -1,9 +1,9 @@
-import { auth } from "./firebase.client";
+import auth from "@react-native-firebase/auth";
 
 import { UserModel } from "../common/models/user";
 
 export const getUserInfo = (): UserModel => {
-  let info = auth.currentUser;
+  let info = auth().currentUser;
   return {
     name: info.displayName,
     email: info.email,
@@ -11,7 +11,7 @@ export const getUserInfo = (): UserModel => {
   };
 };
 
-const getUserID = ():string => {
-  let info = auth.currentUser;
+const getUserID = (): string => {
+  let info = auth().currentUser;
   return info.uid;
 };

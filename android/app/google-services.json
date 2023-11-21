@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "364743032680",
+    "project_id": "social-db-2e95c",
+    "storage_bucket": "social-db-2e95c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:364743032680:android:24512707eefcf078db20dd",
+        "android_client_info": {
+          "package_name": "com.social.gram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "364743032680-d72sjqkolakklunm9u3aqe6rit9j96ij.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARvD7EPeaR_omQU5--69HMwjmntD17HYM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "364743032680-d72sjqkolakklunm9u3aqe6rit9j96ij.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
