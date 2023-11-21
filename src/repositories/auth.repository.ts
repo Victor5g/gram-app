@@ -1,11 +1,12 @@
-import auth from '@react-native-firebase/auth';
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import auth from "@react-native-firebase/auth";
+import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 import COLORS from "../common/constants/colors";
 import { Errors } from "../common/constants/erros";
 
 GoogleSignin.configure({
-  webClientId: '364743032680-d72sjqkolakklunm9u3aqe6rit9j96ij.apps.googleusercontent.com',
+  webClientId:
+    "364743032680-d72sjqkolakklunm9u3aqe6rit9j96ij.apps.googleusercontent.com",
 });
 
 export const authenticateUser = async (email: string, password: string) => {
@@ -25,20 +26,26 @@ export const authenticateGoogle = async () => {
     await auth().signInWithCredential(googleCredential);
     return { logged: true };
   } catch (error) {
-    console.log("--->",error)
     return { logged: false, data: Errors[error.code] };
   }
 };
 
-export const createUser = async (fullName:string, email: string, password: string) => {
+export const createUser = async (
+  fullName: string,
+  email: string,
+  password: string
+) => {
   try {
-    const defaultPhoto = `https://ui-avatars.com/api/?name=${fullName}&length=1&background=${COLORS.secondary.replace('#','')}`;
+    const defaultPhoto = `https://ui-avatars.com/api/?name=${fullName}&length=1&background=${COLORS.secondary.replace(
+      "#",
+      ""
+    )}`;
 
     await auth().createUserWithEmailAndPassword(email, password);
 
     await auth().currentUser.updateProfile({
       displayName: fullName,
-      photoURL: defaultPhoto
+      photoURL: defaultPhoto,
     });
 
     return { created: true };
@@ -47,8 +54,8 @@ export const createUser = async (fullName:string, email: string, password: strin
   }
 };
 
-export const closeUserSession =  async() => {
+export const closeUserSession = async () => {
   await GoogleSignin.revokeAccess();
   await GoogleSignin.signOut();
   auth().signOut();
-}
+};
