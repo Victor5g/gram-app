@@ -36,10 +36,7 @@ export const createUser = async (
   password: string
 ) => {
   try {
-    const defaultPhoto = `https://ui-avatars.com/api/?name=${fullName}&length=1&background=${COLORS.secondary.replace(
-      "#",
-      ""
-    )}`;
+    const defaultPhoto = `https://ui-avatars.com/api/?name=${fullName}&length=1&background=${COLORS.secondary.replace("#","")}`;
 
     await auth().createUserWithEmailAndPassword(email, password);
 

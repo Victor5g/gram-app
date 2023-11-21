@@ -19,7 +19,8 @@ import style from "./style";
 import COLORS from "../../common/constants/colors";
 
 const ProfileView = () => {
-  const { name, followers, followings, userURL, posts, handleSignOut } = useProfileViewModel();
+  const { name, followers, followings, userURL, posts, handleSignOut } =
+    useProfileViewModel();
 
   return (
     <SafeAreaWrapper>
@@ -40,7 +41,7 @@ const ProfileView = () => {
             </TouchableOpacity>
           </View>
           <View style={style.contentImage}>
-            <Loading loading={userURL.length == 0}>
+            <Loading loading={!userURL}>
               <Image
                 style={style.imageProfile}
                 source={{
