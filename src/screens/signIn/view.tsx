@@ -19,9 +19,9 @@ const SignInView = () => {
     enableSignIn,
     setEmail,
     setPassword,
-    validField,
     gotToScreen,
     handleSignIn,
+    handleGoogle,
   } = useSignInViewModel();
 
   return (
@@ -53,14 +53,15 @@ const SignInView = () => {
           <Button
             title={"Sign In"}
             typeButton={"simple"}
-            loading={isLoading}
+            loading={isLoading.simple}
             disabled={!enableSignIn}
             onPress={handleSignIn}
           />
           <Button
-            title={"Sign Up with Google"}
+            title={"Sign In with Google"}
             typeButton={"social"}
-            loading={false}
+            loading={isLoading.google}
+            onPress={handleGoogle}
           />
         </View>
         <View style={style.conentSignUp}>

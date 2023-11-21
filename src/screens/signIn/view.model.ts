@@ -7,21 +7,27 @@ import {
   NavigationProp,
 } from "@react-navigation/native";
 
-import { SignInViewModel } from "./model";
+import { SignInViewModel, LoadingModel } from "./model";
 
-import { authenticateUser } from "../../repositories/auth.repository";
+import {
+  authenticateUser,
+  authenticateGoogle,
+} from "../../repositories/auth.repository";
 
 const useSignInViewModel = (): SignInViewModel => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<LoadingModel>({
+    simple: false,
+    google: false,
+  });
   const [enableSignIn, setEnableSignIn] = useState<boolean>(false);
 
   const navigation: NavigationProp<ParamListBase> = useNavigation();
 
   const handleSignIn = async () => {
     try {
-      setIsLoading(true);
+      setIsLoading((rest) => ({ ...rest, simple: true }));
       let instance = await authenticateUser(email, password);
       if (!instance.logged) {
         if (instance.data) {
@@ -34,7 +40,31 @@ const useSignInViewModel = (): SignInViewModel => {
     } catch {
       Alert.alert("SignUp", "Error during Sign In, please try again later.");
     } finally {
-      setIsLoading(false);
+      setIsLoading((rest) => ({ ...rest, simple: false }));
+    }
+  };
+
+  const handleGoogle = async () => {
+    try {
+      setIsLoading((rest) => ({ ...rest, google: true }));
+      let instance = await authenticateGoogle();
+      if (!instance.logged) {
+        if (instance.data) {
+          if (instance.data !== "Canceled") {
+            Alert.alert(instance.data);
+          }
+        } else {
+          throw new Error();
+        }
+        return;
+      }
+    } catch {
+      Alert.alert(
+        "SignUp",
+        "Error during Sign Up with Google, please try again later."
+      );
+    } finally {
+      setIsLoading((rest) => ({ ...rest, google: false }));
     }
   };
 
@@ -61,9 +91,9 @@ const useSignInViewModel = (): SignInViewModel => {
     enableSignIn,
     setEmail,
     setPassword,
-    validField,
     gotToScreen,
     handleSignIn,
+    handleGoogle,
   };
 };
 
