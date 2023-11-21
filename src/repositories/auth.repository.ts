@@ -55,7 +55,6 @@ export const createUser = async (
 };
 
 export const closeUserSession = async () => {
-  await GoogleSignin.revokeAccess();
   await GoogleSignin.signOut();
-  auth().signOut();
+  await auth().signOut();
 };
