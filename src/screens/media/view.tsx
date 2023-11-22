@@ -56,6 +56,7 @@ const MediaView = () => {
                   volume={1.0}
                   isMuted={true}
                   shouldPlay
+                  resizeMode="cover"
                   isLooping
                   style={{ width: "100%", height: "100%" }}
                   useNativeControls={false}
@@ -119,7 +120,7 @@ const MediaView = () => {
         <BlurView
           style={style.loadingBlur}
           blurType="dark"
-          blurAmount={10}
+          blurAmount={20}
           reducedTransparencyFallbackColor="white"
         >
           <Text style={style.loadingText}>{`Loading... ${progress}%`}</Text>

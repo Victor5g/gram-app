@@ -29,6 +29,7 @@ const style = StyleSheet.create({
     height: Dimensions.get("window").height,
     alignItems: "center",
     justifyContent: "center",
+    zIndex:1
   },
   loadingText: {
     color: COLORS.white,
