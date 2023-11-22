@@ -51,24 +51,22 @@ export const registerMedia = async (
   mediaURL: string,
   createdAt: string
 ): Promise<boolean> => {
-  try {
-    return new Promise((resolve, reject) => {
-      firestore()
-        .collection("medias")
-        .add({
-          author,
-          title,
-          description,
-          fileType,
-          mediaURL,
-          createdAt,
-        })
-        .then((_) => {
-          resolve(true);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
-  } catch (e) {}
+  return new Promise((resolve, reject) => {
+    firestore()
+      .collection("medias")
+      .add({
+        author,
+        title,
+        description,
+        fileType,
+        mediaURL,
+        createdAt,
+      })
+      .then((_) => {
+        resolve(true);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 };
