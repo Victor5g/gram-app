@@ -6,15 +6,14 @@ import COLORS from "../../common/constants/colors";
 const style = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
     paddingTop: 16,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: COLORS.secondary,
+    backgroundColor: COLORS.white,
   },
   uploadVideo: {
     position: "absolute",
-    bottom: 60,
+    bottom: 55,
     right: 25,
     width: 70,
     height: 70,
@@ -29,12 +28,51 @@ const style = StyleSheet.create({
     height: Dimensions.get("window").height,
     alignItems: "center",
     justifyContent: "center",
-    zIndex:1
+    zIndex: 1,
   },
   loadingText: {
     color: COLORS.white,
     fontSize: RFValue(18),
     fontWeight: "600",
+  },
+  camera: {
+    width: "100%",
+    height: "100%",
+  },
+  contentVideo: {
+    width: "85%",
+    height: "50%",
+    overflow: "hidden",
+    borderColor: COLORS.lightGray,
+    borderRadius: 15,
+    borderWidth: 1,
+  },
+  video: {
+    width: "100%",
+    height: "100%",
+  },
+  form: {
+    width: "85%",
+    gap: 12,
+    marginTop: 13,
+  },
+  button: {
+    width: "100%",
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 10,
+  },
+  uploadButton: {
+    backgroundColor: COLORS.primary,
+  },
+  closeButton: {
+    backgroundColor: COLORS.black,
+  },
+  contentButtons: { 
+    width: "85%", 
+    marginTop: 30, 
+    gap: 10 
   },
 });
 

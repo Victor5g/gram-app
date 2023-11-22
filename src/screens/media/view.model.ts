@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import * as ImagePicker from "expo-image-picker";
+import { Camera, PermissionResponse } from "expo-camera";
 
 import {
   uploadMedia,
@@ -10,12 +11,18 @@ import { getUserID } from "../../repositories/user.respository";
 import { MediaViewModel } from "./model";
 
 const useMediaViewModel = (): MediaViewModel => {
+  let cameraRef = useRef<Camera>();
+
   const [video, setVideo] = useState<string>("");
   const [mode, setMode] = useState<string>("initial");
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [progress, setProgress] = useState<number>(0);
   const [isLoading, setIsloading] = useState<boolean>(false);
+
+  const [hasCameraPermission, setHasCameraPermission] = useState(false);
+  const [hasMicrophonePermission, setHasMicrophonePermission] = useState(false);
+  const [isRecording, setIsRecording] = useState<boolean>(false);
 
   const handlePickVideo = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -51,6 +58,34 @@ const useMediaViewModel = (): MediaViewModel => {
     }
   };
 
+  const recordVideo = () => {
+    setIsRecording(true);
+    let options = {
+      quality: "1080p",
+      maxDuration: 60,
+      mute: false,
+    };
+    cameraRef.current.recordAsync(options).then((recordedVideo) => {
+      setVideo(recordedVideo.uri);
+      setIsRecording(false);
+    });
+  };
+
+  const stopRecording = () => {
+    setIsRecording(false);
+    cameraRef.current.stopRecording();
+  };
+
+  const loadPermissions = async () => {
+    const cameraPermission: PermissionResponse =
+      await Camera.requestCameraPermissionsAsync();
+    const microphonePermission: PermissionResponse =
+      await Camera.requestMicrophonePermissionsAsync();
+
+    setHasCameraPermission(cameraPermission.status === "granted");
+    setHasMicrophonePermission(microphonePermission.status === "granted");
+  };
+
   const resetState = () => {
     setVideo("");
     setMode("initial");
@@ -59,6 +94,10 @@ const useMediaViewModel = (): MediaViewModel => {
     setProgress(0);
   };
 
+  useEffect(() => {
+    loadPermissions();
+  });
+
   return {
     video,
     mode,
@@ -66,11 +105,15 @@ const useMediaViewModel = (): MediaViewModel => {
     description,
     progress,
     isLoading,
+    isRecording,
     setTitle,
     setDescription,
     handlePickVideo,
     handleMedia,
     resetState,
+    cameraRef,
+    recordVideo,
+    stopRecording,
   };
 };
 

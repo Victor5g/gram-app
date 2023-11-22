@@ -1,4 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, RefObject } from "react";
+import { Camera } from "expo-camera";
+
 export interface MediaViewModel {
   video: string;
   mode: string;
@@ -6,9 +8,13 @@ export interface MediaViewModel {
   description: string;
   progress: number;
   isLoading: boolean;
-  setTitle: Dispatch<SetStateAction<string>> ;
-  setDescription: Dispatch<SetStateAction<string>> ;
+  isRecording: boolean;
+  setTitle: Dispatch<SetStateAction<string>>;
+  setDescription: Dispatch<SetStateAction<string>>;
+  cameraRef: RefObject<Camera>;
   handlePickVideo: () => void;
   handleMedia: () => void;
-  resetState: ()=> void;
+  resetState: () => void;
+  recordVideo: () => void;
+  stopRecording: () => void;
 }
