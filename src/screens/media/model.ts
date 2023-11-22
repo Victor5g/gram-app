@@ -8,7 +8,9 @@ export interface MediaViewModel {
   description: string;
   progress: number;
   isLoading: boolean;
+  reloadCamera: boolean;
   isRecording: boolean;
+  enabledCamera: boolean;
   setTitle: Dispatch<SetStateAction<string>>;
   setDescription: Dispatch<SetStateAction<string>>;
   cameraRef: RefObject<Camera>;

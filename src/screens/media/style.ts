@@ -69,10 +69,25 @@ const style = StyleSheet.create({
   closeButton: {
     backgroundColor: COLORS.black,
   },
-  contentButtons: { 
-    width: "85%", 
-    marginTop: 30, 
-    gap: 10 
+  contentButtons: {
+    width: "85%",
+    marginTop: 30,
+    gap: 10,
+  },
+  labelPermission: {
+    color: COLORS.primaryBlack,
+    fontSize: RFValue(15),
+    fontWeight: "400",
+  },
+  contentLabel: {
+    width: "90%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  recordButton: {
+    position: "absolute",
+    bottom: 30,
+    alignSelf: "center",
   },
 });
 

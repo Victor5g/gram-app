@@ -22,9 +22,11 @@ const MediaView = () => {
     title,
     progress,
     description,
+    enabledCamera,
     handlePickVideo,
     handleMedia,
     isLoading,
+    reloadCamera,
     resetState,
     setTitle,
     setDescription,
@@ -37,19 +39,29 @@ const MediaView = () => {
   return (
     <SafeAreaWrapper>
       <View style={style.container}>
-        {mode === "initial" && (
-          <Camera style={style.camera} ref={cameraRef}>
-            <TouchableOpacity
-              onPress={isRecording ? stopRecording : recordVideo}
-              style={{ position: "absolute", bottom: 30, alignSelf: "center" }}
-            >
-              <Entypo
-                name="controller-record"
-                size={120}
-                color={isRecording ? "red" : "white"}
-              />
-            </TouchableOpacity>
-          </Camera>
+        {mode === "initial" && enabledCamera ? (
+          reloadCamera && (
+            <Camera style={style.camera} ref={cameraRef}>
+              <TouchableOpacity
+                onPress={isRecording ? stopRecording : recordVideo}
+                style={style.recordButton}
+              >
+                <Entypo
+                  name="controller-record"
+                  size={120}
+                  color={isRecording ? "red" : "white"}
+                />
+              </TouchableOpacity>
+            </Camera>
+          )
+        ) : (
+          <View style={style.contentLabel}>
+            <Text style={style.labelPermission}>
+              {
+                "Permission for camera and microphone not granted. Please change this in settings."
+              }
+            </Text>
+          </View>
         )}
 
         {mode === "details" && (
@@ -87,7 +99,7 @@ const MediaView = () => {
             </View>
           </>
         )}
-        {mode === "initial" && (
+        {mode === "initial" && !isRecording && (
           <TouchableOpacity onPress={handlePickVideo} style={style.uploadVideo}>
             <MaterialIcons name="video-library" size={24} color="white" />
           </TouchableOpacity>

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import * as ImagePicker from "expo-image-picker";
 import { Camera, PermissionResponse } from "expo-camera";
 
@@ -9,6 +9,7 @@ import {
 import { getUserID } from "../../repositories/user.respository";
 
 import { MediaViewModel } from "./model";
+import { useFocusEffect } from "@react-navigation/native";
 
 const useMediaViewModel = (): MediaViewModel => {
   let cameraRef = useRef<Camera>();
@@ -19,6 +20,8 @@ const useMediaViewModel = (): MediaViewModel => {
   const [description, setDescription] = useState<string>("");
   const [progress, setProgress] = useState<number>(0);
   const [isLoading, setIsloading] = useState<boolean>(false);
+  const [reloadCamera, setReloadCamera] = useState<boolean>(true);
+  const [enabledCamera, setEnabledCamera] = useState<boolean>(true);
 
   const [hasCameraPermission, setHasCameraPermission] = useState(false);
   const [hasMicrophonePermission, setHasMicrophonePermission] = useState(false);
@@ -74,6 +77,7 @@ const useMediaViewModel = (): MediaViewModel => {
   const stopRecording = () => {
     setIsRecording(false);
     cameraRef.current.stopRecording();
+    setMode("details");
   };
 
   const loadPermissions = async () => {
@@ -81,9 +85,9 @@ const useMediaViewModel = (): MediaViewModel => {
       await Camera.requestCameraPermissionsAsync();
     const microphonePermission: PermissionResponse =
       await Camera.requestMicrophonePermissionsAsync();
-
     setHasCameraPermission(cameraPermission.status === "granted");
     setHasMicrophonePermission(microphonePermission.status === "granted");
+    setEnabledCamera(hasCameraPermission === hasMicrophonePermission);
   };
 
   const resetState = () => {
@@ -94,9 +98,18 @@ const useMediaViewModel = (): MediaViewModel => {
     setProgress(0);
   };
 
+  useFocusEffect(
+    useCallback(() => {
+      setReloadCamera(true);
+      return () => {
+        setReloadCamera(false);
+      };
+    }, [])
+  );
+
   useEffect(() => {
     loadPermissions();
-  });
+  }, []);
 
   return {
     video,
@@ -105,7 +118,9 @@ const useMediaViewModel = (): MediaViewModel => {
     description,
     progress,
     isLoading,
+    reloadCamera,
     isRecording,
+    enabledCamera,
     setTitle,
     setDescription,
     handlePickVideo,
