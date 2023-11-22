@@ -11,7 +11,7 @@ export const getUserInfo = (): UserModel => {
   };
 };
 
-const getUserID = (): string => {
+export const getUserID = (): string => {
   let info = auth().currentUser;
   return info.uid;
 };
