@@ -31,6 +31,9 @@ const style = StyleSheet.create({
     zIndex: 1,
   },
   loadingText: {
+    position: "absolute",
+    textAlign: "center",
+    textAlignVertical: "center",
     color: COLORS.white,
     fontSize: RFValue(18),
     fontWeight: "600",

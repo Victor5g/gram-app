@@ -6,7 +6,7 @@ export default function App() {
   return (
     <Fragment>
       <Routes/>
-      <StatusBar style="dark" />
+      <StatusBar style="auto" />
     </Fragment>
   );
 }

@@ -132,7 +132,9 @@ const MediaView = () => {
           blurAmount={20}
           reducedTransparencyFallbackColor="white"
         >
-          <Text style={style.loadingText}>{`Sending... ${progress}%`}</Text>
+          <Text style={style.loadingText}>
+            {progress >= 100 ? "Sent with success" : `Sending... ${progress}%`}
+          </Text>
         </BlurView>
       )}
     </SafeAreaWrapper>
