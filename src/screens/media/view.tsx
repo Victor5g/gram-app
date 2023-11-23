@@ -49,7 +49,7 @@ const MediaView = () => {
                     >
                       <Entypo
                         name="controller-record"
-                        size={120}
+                        size={95}
                         color={isRecording ? "red" : "white"}
                       />
                     </TouchableOpacity>
