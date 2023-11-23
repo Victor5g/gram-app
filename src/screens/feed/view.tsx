@@ -11,12 +11,12 @@ const FeedView = () => {
       <View style={style.container}>
         <View style={style.header}>
           <Text style={style.title}>{"Feeds"}</Text>
-          <Image
+          {/* <Image
             style={style.imageProfile}
             source={{
               uri: "https://avatars.githubusercontent.com/u/51713169?v=4",
             }}
-          />
+          /> */}
         </View>
 
         <Text>{"FeedView"}</Text>

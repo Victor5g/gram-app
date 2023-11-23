@@ -1,12 +1,10 @@
 import React from "react";
 import { View, TouchableOpacity, Text } from "react-native";
-import { Video, ResizeMode } from "expo-av";
 import { Camera } from "expo-camera";
+import { Video, ResizeMode } from "expo-av";
 import { BlurView } from "@react-native-community/blur";
 
-import { Ionicons } from "@expo/vector-icons";
-import { Entypo } from "@expo/vector-icons";
-import { MaterialIcons } from "@expo/vector-icons";
+import { Ionicons, Entypo, MaterialIcons } from "@expo/vector-icons";
 
 import SafeAreaWrapper from "../../components/safeAreaWrapper";
 import Input from "../../components/input";
@@ -22,10 +20,10 @@ const MediaView = () => {
     title,
     progress,
     description,
-    enabledCamera,
     handlePickVideo,
     handleMedia,
     isLoading,
+    hasRecordPermission,
     reloadCamera,
     resetState,
     setTitle,
@@ -39,29 +37,34 @@ const MediaView = () => {
   return (
     <SafeAreaWrapper>
       <View style={style.container}>
-        {mode === "initial" && enabledCamera ? (
-          reloadCamera && (
-            <Camera style={style.camera} ref={cameraRef}>
-              <TouchableOpacity
-                onPress={isRecording ? stopRecording : recordVideo}
-                style={style.recordButton}
-              >
-                <Entypo
-                  name="controller-record"
-                  size={120}
-                  color={isRecording ? "red" : "white"}
-                />
-              </TouchableOpacity>
-            </Camera>
-          )
-        ) : (
-          <View style={style.contentLabel}>
-            <Text style={style.labelPermission}>
-              {
-                "Permission for camera and microphone not granted. Please change this in settings."
-              }
-            </Text>
-          </View>
+        {mode === "initial" && (
+          <>
+            {reloadCamera &&
+              (hasRecordPermission === null ||
+                (hasRecordPermission === true && (
+                  <Camera style={style.camera} ref={cameraRef}>
+                    <TouchableOpacity
+                      onPress={isRecording ? stopRecording : recordVideo}
+                      style={style.recordButton}
+                    >
+                      <Entypo
+                        name="controller-record"
+                        size={120}
+                        color={isRecording ? "red" : "white"}
+                      />
+                    </TouchableOpacity>
+                  </Camera>
+                )))}
+            {hasRecordPermission === false && (
+              <View style={style.contentLabel}>
+                <Text style={style.labelPermission}>
+                  {
+                    "Permission for camera and microphone not granted. Please change this in settings."
+                  }
+                </Text>
+              </View>
+            )}
+          </>
         )}
 
         {mode === "details" && (
@@ -129,7 +132,7 @@ const MediaView = () => {
           blurAmount={20}
           reducedTransparencyFallbackColor="white"
         >
-          <Text style={style.loadingText}>{`Loading... ${progress}%`}</Text>
+          <Text style={style.loadingText}>{`Sending... ${progress}%`}</Text>
         </BlurView>
       )}
     </SafeAreaWrapper>

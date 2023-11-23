@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
-import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
+import auth, { FirebaseAuthTypes } from "@react-native-firebase/auth";
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -11,7 +11,7 @@ import Home from "./app.tab.routes";
 import Loading from "../components/loading";
 
 const Routes = () => {
-  const [user, setUser] = useState<FirebaseAuthTypes.User|null>(null);
+  const [user, setUser] = useState<FirebaseAuthTypes.User | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {

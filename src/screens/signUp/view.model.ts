@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Alert } from "react-native";
 import {
   useNavigation,
   ParamListBase,
@@ -8,7 +9,6 @@ import {
 import { SignUpViewModel } from "./model";
 
 import { createUser } from "../../repositories/auth.repository";
-import { Alert } from "react-native";
 
 const useSignUpViewModel = (): SignUpViewModel => {
   const [name, setName] = useState<string>("");

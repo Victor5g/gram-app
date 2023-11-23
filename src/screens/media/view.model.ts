@@ -1,15 +1,15 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import * as ImagePicker from "expo-image-picker";
+import { useFocusEffect } from "@react-navigation/native";
 import { Camera, PermissionResponse } from "expo-camera";
+import * as ImagePicker from "expo-image-picker";
 
+import { MediaViewModel } from "./model";
+
+import { getUserID } from "../../repositories/user.respository";
 import {
   uploadMedia,
   registerMedia,
 } from "../../repositories/media.repository";
-import { getUserID } from "../../repositories/user.respository";
-
-import { MediaViewModel } from "./model";
-import { useFocusEffect } from "@react-navigation/native";
 
 const useMediaViewModel = (): MediaViewModel => {
   let cameraRef = useRef<Camera>();
@@ -19,12 +19,12 @@ const useMediaViewModel = (): MediaViewModel => {
   const [title, setTitle] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [progress, setProgress] = useState<number>(0);
+
   const [isLoading, setIsloading] = useState<boolean>(false);
   const [reloadCamera, setReloadCamera] = useState<boolean>(true);
-  const [enabledCamera, setEnabledCamera] = useState<boolean>(true);
-
-  const [hasCameraPermission, setHasCameraPermission] = useState(false);
-  const [hasMicrophonePermission, setHasMicrophonePermission] = useState(false);
+  const [hasRecordPermission, setHasRecordPermission] = useState<
+    boolean | null
+  >();
   const [isRecording, setIsRecording] = useState<boolean>(false);
 
   const handlePickVideo = async () => {
@@ -81,13 +81,13 @@ const useMediaViewModel = (): MediaViewModel => {
   };
 
   const loadPermissions = async () => {
-    const cameraPermission: PermissionResponse =
+    const camera: PermissionResponse =
       await Camera.requestCameraPermissionsAsync();
-    const microphonePermission: PermissionResponse =
+    const microphone: PermissionResponse =
       await Camera.requestMicrophonePermissionsAsync();
-    setHasCameraPermission(cameraPermission.status === "granted");
-    setHasMicrophonePermission(microphonePermission.status === "granted");
-    setEnabledCamera(hasCameraPermission === hasMicrophonePermission);
+    setHasRecordPermission(
+      camera.status === "granted" && microphone.status === "granted"
+    );
   };
 
   const resetState = () => {
@@ -119,8 +119,8 @@ const useMediaViewModel = (): MediaViewModel => {
     progress,
     isLoading,
     reloadCamera,
+    hasRecordPermission,
     isRecording,
-    enabledCamera,
     setTitle,
     setDescription,
     handlePickVideo,

@@ -13,10 +13,10 @@ import { AntDesign } from "@expo/vector-icons";
 import SafeAreaWrapper from "../../components/safeAreaWrapper";
 import Loading from "../../components/loading";
 
-import useProfileViewModel from "./view.model";
-
 import style from "./style";
 import COLORS from "../../common/constants/colors";
+
+import useProfileViewModel from "./view.model";
 
 const ProfileView = () => {
   const { name, followers, followings, userURL, posts, handleSignOut } =
