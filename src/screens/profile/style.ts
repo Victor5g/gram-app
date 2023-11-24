@@ -15,11 +15,7 @@ const style = StyleSheet.create({
   header: {
     width: "100%",
     alignItems: "center",
-    marginBottom: 30,
-  },
-  contentHeader: {
-    width: "90%",
-    alignItems: "flex-end",
+    marginBottom: 14,
   },
   logoutButton: {
     position: "absolute",
@@ -68,6 +64,13 @@ const style = StyleSheet.create({
     fontWeight: "600",
     color: COLORS.primaryBlack,
   },
+  labelPost: {
+    fontSize: RFValue(15),
+    fontStyle: "normal",
+    fontWeight: "600",
+    color: COLORS.primaryBlack,
+    marginTop: 20,
+  },
   labelValue: {
     fontSize: RFValue(15),
     fontStyle: "normal",
@@ -92,13 +95,27 @@ const style = StyleSheet.create({
   },
   constentItem: {
     width: w(92),
-    height: 180,
+    height: h(30),
     overflow: "hidden",
     borderRadius: 10,
     margin: 9,
   },
   item: {
     flex: 1,
+  },
+  infoPost: {
+    position: "absolute",
+    bottom: 28,
+    left: 23,
+    gap: 3,
+  },
+  titlePost: {
+    color: COLORS.white,
+    fontSize: RFValue(16),
+  },
+  description: {
+    color: COLORS.white,
+    fontSize: RFValue(10),
   },
 });
 

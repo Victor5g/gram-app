@@ -1,17 +1,11 @@
 import React from "react";
-import {
-  Text,
-  View,
-  Image,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
-import { Video, ResizeMode } from "expo-av";
+import { Text, View, Image, FlatList, TouchableOpacity } from "react-native";
 
 import { AntDesign } from "@expo/vector-icons";
 
 import SafeAreaWrapper from "../../components/safeAreaWrapper";
 import Loading from "../../components/loading";
+import PlayerVideo from "../../components/video";
 
 import style from "./style";
 import COLORS from "../../common/constants/colors";
@@ -33,14 +27,12 @@ const ProfileView = () => {
         }}
         ListHeaderComponent={
           <View style={style.header}>
-            {/* <View style={style.contentHeader}> */}
             <TouchableOpacity
               style={style.logoutButton}
               onPress={handleSignOut}
             >
               <AntDesign name="logout" size={30} color={COLORS.primaryBlack} />
             </TouchableOpacity>
-            {/* </View> */}
             <View style={style.contentImage}>
               <Loading loading={!userURL}>
                 <Image
@@ -65,25 +57,30 @@ const ProfileView = () => {
                 <Text style={style.labelInfo}>{"following"}</Text>
               </View>
             </View>
+            <Text style={style.labelPost}>{"Your posts"}</Text>
           </View>
         }
         data={posts}
         renderItem={({ item, index }) => (
-          <View style={style.constentItem}>
-            <View key={index} style={style.item}>
-              <Video
-                source={{
-                  uri: /*item.mediaURL*/ "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
-                }}
-                rate={1.0}
-                volume={1.0}
-                isMuted={false}
-                shouldPlay={false}
-                isLooping={true}
-                resizeMode={ResizeMode.COVER}
-                style={{ flex: 1 }}
-                useNativeControls={true}
-              />
+          <View key={"content" + index} style={style.constentItem}>
+            <View key={"item" + index} style={style.item}>
+              <PlayerVideo url={item.mediaURL} playInFullScreen={true} />
+              <View style={style.infoPost}>
+                <Text
+                  ellipsizeMode="tail"
+                  numberOfLines={2}
+                  style={style.titlePost}
+                >
+                  {item.title}
+                </Text>
+                <Text
+                  ellipsizeMode="tail"
+                  numberOfLines={2}
+                  style={style.description}
+                >
+                  {item.description}
+                </Text>
+              </View>
             </View>
           </View>
         )}
