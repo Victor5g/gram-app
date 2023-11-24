@@ -1,5 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 
+import { PostModel } from "../common/models/post";
+
 import storage from "@react-native-firebase/storage";
 import firestore from "@react-native-firebase/firestore";
 
@@ -69,4 +71,20 @@ export const registerMedia = async (
         reject(error);
       });
   });
+};
+
+export const getAllMediaUser = async (
+  userId: String
+): Promise<{ sucess: boolean; medias: Array<PostModel> }> => {
+  try {
+    const userMedia = [];
+    const queryData = await firestore()
+      .collection("medias")
+      .where("author", "==", userId)
+      .get();
+    queryData.forEach((snapshot) => userMedia.push(snapshot.data()));
+    return { sucess: true, medias: userMedia };
+  } catch (error) {
+    return { sucess: true, medias: [] };
+  }
 };

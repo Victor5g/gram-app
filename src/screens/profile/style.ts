@@ -13,15 +13,18 @@ const style = StyleSheet.create({
     flex: 1,
   },
   header: {
+    width: "100%",
+    alignItems: "center",
+    marginBottom: 30,
+  },
+  contentHeader: {
     width: "90%",
     alignItems: "flex-end",
   },
-  body: {
-    width: "100%",
-    alignItems: "center",
-  },
   logoutButton: {
+    position: "absolute",
     padding: 9,
+    right: 4,
   },
   contentImage: {
     width: w(40),
@@ -87,20 +90,15 @@ const style = StyleSheet.create({
     shadowRadius: 9.11,
     elevation: 14,
   },
-  sent: {
-    width: "90%",
-    height: "auto",
-    marginTop: 30,
-    marginHorizontal: 2,
-    flexDirection: "row",
+  constentItem: {
+    width: w(92),
+    height: 180,
+    overflow: "hidden",
+    borderRadius: 10,
+    margin: 9,
   },
   item: {
     flex: 1,
-    height: 120,
-    backgroundColor: "gray",
-    margin: 3,
-    padding: 8,
-    borderRadius: 10,
   },
 });
 

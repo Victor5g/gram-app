@@ -1,12 +1,12 @@
 import React from "react";
 import {
   Text,
-  ScrollView,
   View,
   Image,
   FlatList,
   TouchableOpacity,
 } from "react-native";
+import { Video, ResizeMode } from "expo-av";
 
 import { AntDesign } from "@expo/vector-icons";
 
@@ -24,61 +24,70 @@ const ProfileView = () => {
 
   return (
     <SafeAreaWrapper>
-      <ScrollView
+      <FlatList
         style={style.container}
         contentContainerStyle={{
           paddingTop: 25,
           paddingBottom: 25,
+          alignItems: "center",
         }}
-      >
-        <View style={style.body}>
+        ListHeaderComponent={
           <View style={style.header}>
+            {/* <View style={style.contentHeader}> */}
             <TouchableOpacity
               style={style.logoutButton}
               onPress={handleSignOut}
             >
               <AntDesign name="logout" size={30} color={COLORS.primaryBlack} />
             </TouchableOpacity>
+            {/* </View> */}
+            <View style={style.contentImage}>
+              <Loading loading={!userURL}>
+                <Image
+                  style={style.imageProfile}
+                  source={{
+                    uri: userURL,
+                  }}
+                />
+              </Loading>
+            </View>
+
+            <Text style={style.labelUserName}>{name}</Text>
+
+            <View style={style.boxInfo}>
+              <View style={style.contentInfo}>
+                <Text style={style.labelValue}>{followers}</Text>
+                <Text style={style.labelInfo}>{"Followers"}</Text>
+              </View>
+
+              <View style={style.contentInfo}>
+                <Text style={style.labelValue}>{followings}</Text>
+                <Text style={style.labelInfo}>{"following"}</Text>
+              </View>
+            </View>
           </View>
-          <View style={style.contentImage}>
-            <Loading loading={!userURL}>
-              <Image
-                style={style.imageProfile}
+        }
+        data={posts}
+        renderItem={({ item, index }) => (
+          <View style={style.constentItem}>
+            <View key={index} style={style.item}>
+              <Video
                 source={{
-                  uri: userURL,
+                  uri: /*item.mediaURL*/ "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
                 }}
+                rate={1.0}
+                volume={1.0}
+                isMuted={false}
+                shouldPlay={false}
+                isLooping={true}
+                resizeMode={ResizeMode.COVER}
+                style={{ flex: 1 }}
+                useNativeControls={true}
               />
-            </Loading>
-          </View>
-
-          <Text style={style.labelUserName}>{name}</Text>
-
-          <View style={style.boxInfo}>
-            <View style={style.contentInfo}>
-              <Text style={style.labelValue}>{followers}</Text>
-              <Text style={style.labelInfo}>{"Followers"}</Text>
-            </View>
-
-            <View style={style.contentInfo}>
-              <Text style={style.labelValue}>{followings}</Text>
-              <Text style={style.labelInfo}>{"following"}</Text>
             </View>
           </View>
-
-          <View style={style.sent}>
-            <FlatList
-              data={posts}
-              numColumns={3}
-              scrollEnabled={false}
-              renderItem={({ item }) => (
-                <View key={item.id} style={style.item}>
-                  <Text>{item.name}</Text>
-                </View>
-              )}
-            />
-          </View>
-        </View>
-      </ScrollView>
+        )}
+      />
     </SafeAreaWrapper>
   );
 };

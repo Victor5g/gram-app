@@ -1,24 +1,20 @@
 import { useState, useEffect } from "react";
 
-import { ProfileViewModel, ProfileUserPosts } from "./model";
+import { PostModel } from "../../common/models/post";
 import { UserModel } from "../../common/models/user";
+import { ProfileViewModel } from "./model";
 
 import { closeUserSession } from "../../repositories/auth.repository";
-import { getUserInfo } from "../../repositories/user.respository";
+import { getUserInfo, getUserID } from "../../repositories/user.respository";
+import { getAllMediaUser } from "../../repositories/media.repository";
 
 const useProfileViewModel = (): ProfileViewModel => {
-
   const [name, setName] = useState<string>("");
   const [followers, setFollowers] = useState<number>(0);
   const [followings, setFollowings] = useState<number>(0);
   const [userURL, setUserURL] = useState<string>("");
 
-  const [posts, setPosts] = useState<ProfileUserPosts[]>([
-    { id: "1", name: "Cruz Ramirez" },
-    { id: "2", name: "Cruz Ramirez" },
-    { id: "3", name: "Cruz Ramirez" },
-    { id: "4", name: "Cruz Ramirez" },
-  ]);
+  const [posts, setPosts] = useState<PostModel[]>([]);
 
   const [isLoading, seLoading] = useState<boolean>(false);
 
@@ -30,11 +26,19 @@ const useProfileViewModel = (): ProfileViewModel => {
     }
   };
 
+  const loadUserPosts = async () => {
+    let response = await getAllMediaUser(getUserID());
+    if (response.sucess) {
+      setPosts(response.medias);
+    }
+  };
+
   const handleSignOut = () => {
     closeUserSession();
   };
 
   useEffect(() => {
+    loadUserPosts();
     loadView();
   }, []);
 
