@@ -47,7 +47,6 @@ const PlayerVideo = ({ url, playInFullScreen, ...rest }: PlayerViewItem) => {
         rate={1.0}
         volume={1.0}
         isMuted={false}
-        shouldPlay={false}
         isLooping={true}
         onLoadStart={() => setLoading(true)}
         onReadyForDisplay={() => setLoading(false)}

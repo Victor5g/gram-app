@@ -13,7 +13,6 @@ const useProfileViewModel = (): ProfileViewModel => {
   const [followers, setFollowers] = useState<number>(0);
   const [followings, setFollowings] = useState<number>(0);
   const [userURL, setUserURL] = useState<string>("");
-
   const [posts, setPosts] = useState<PostModel[]>([]);
 
   const [isLoading, seLoading] = useState<boolean>(false);
@@ -27,10 +26,12 @@ const useProfileViewModel = (): ProfileViewModel => {
   };
 
   const loadUserPosts = async () => {
+    seLoading(true);
     let response = await getAllMediaUser(getUserID());
     if (response.sucess) {
       setPosts(response.medias);
     }
+    seLoading(false);
   };
 
   const handleSignOut = () => {
@@ -47,6 +48,7 @@ const useProfileViewModel = (): ProfileViewModel => {
     followers,
     followings,
     userURL,
+    isLoading,
     posts,
     handleSignOut,
   };

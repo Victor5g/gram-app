@@ -1,7 +1,16 @@
-import React from "react";
-import { Text, View, Image, FlatList, TouchableOpacity } from "react-native";
+import React, { useCallback } from "react";
+import {
+  Text,
+  View,
+  Image,
+  FlatList,
+  TouchableOpacity,
+  ListRenderItem,
+} from "react-native";
 
 import { AntDesign } from "@expo/vector-icons";
+
+import { PostModel } from "../../common/models/post";
 
 import SafeAreaWrapper from "../../components/safeAreaWrapper";
 import Loading from "../../components/loading";
@@ -13,8 +22,50 @@ import COLORS from "../../common/constants/colors";
 import useProfileViewModel from "./view.model";
 
 const ProfileView = () => {
-  const { name, followers, followings, userURL, posts, handleSignOut } =
-    useProfileViewModel();
+  const {
+    name,
+    followers,
+    followings,
+    userURL,
+    posts,
+    isLoading,
+    handleSignOut,
+  } = useProfileViewModel();
+
+  const UserPosts = useCallback(
+    ({ item, index }: { item: PostModel; index: number }) => {
+      return (
+        <Loading loading={isLoading}>
+          <View key={"@C" + index} style={style.constentItem}>
+            <View key={"@I" + index} style={style.item}>
+              <PlayerVideo
+                url={item.mediaURL}
+                playInFullScreen={true}
+                shouldPlay={false}
+              />
+              <View style={style.infoPost}>
+                <Text
+                  ellipsizeMode="tail"
+                  numberOfLines={2}
+                  style={style.titlePost}
+                >
+                  {item.title}
+                </Text>
+                <Text
+                  ellipsizeMode="tail"
+                  numberOfLines={2}
+                  style={style.description}
+                >
+                  {item.description}
+                </Text>
+              </View>
+            </View>
+          </View>
+        </Loading>
+      );
+    },
+    []
+  );
 
   return (
     <SafeAreaWrapper>
@@ -61,29 +112,9 @@ const ProfileView = () => {
           </View>
         }
         data={posts}
-        renderItem={({ item, index }) => (
-          <View key={"content" + index} style={style.constentItem}>
-            <View key={"item" + index} style={style.item}>
-              <PlayerVideo url={item.mediaURL} playInFullScreen={true} />
-              <View style={style.infoPost}>
-                <Text
-                  ellipsizeMode="tail"
-                  numberOfLines={2}
-                  style={style.titlePost}
-                >
-                  {item.title}
-                </Text>
-                <Text
-                  ellipsizeMode="tail"
-                  numberOfLines={2}
-                  style={style.description}
-                >
-                  {item.description}
-                </Text>
-              </View>
-            </View>
-          </View>
-        )}
+        initialNumToRender={1}
+        maxToRenderPerBatch={2}
+        renderItem={UserPosts}
       />
     </SafeAreaWrapper>
   );

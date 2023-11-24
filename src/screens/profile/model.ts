@@ -5,6 +5,7 @@ export interface ProfileViewModel {
   followers: number;
   followings: number;
   userURL: string;
+  isLoading: boolean;
   posts: Array<PostModel>;
   handleSignOut: () => void;
 }
