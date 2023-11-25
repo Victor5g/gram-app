@@ -102,6 +102,7 @@ const style = StyleSheet.create({
   },
   item: {
     flex: 1,
+    backgroundColor: "black",
   },
   infoPost: {
     position: "absolute",

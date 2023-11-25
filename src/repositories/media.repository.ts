@@ -73,7 +73,7 @@ export const registerMedia = async (
   });
 };
 
-export const getAllMediaUser = async (
+export const getAllMediaByUser = async (
   userId: String
 ): Promise<{ sucess: boolean; medias: Array<PostModel> }> => {
   try {
@@ -85,6 +85,23 @@ export const getAllMediaUser = async (
     queryData.forEach((snapshot) => userMedia.push(snapshot.data()));
     return { sucess: true, medias: userMedia };
   } catch (error) {
-    return { sucess: true, medias: [] };
+    return { sucess: false, medias: [] };
+  }
+};
+
+export const getAllPostedMedia = async (): Promise<{
+  sucess: boolean;
+  medias: Array<PostModel>;
+}> => {
+  try {
+    const userMedia = [];
+    const queryData = await firestore()
+      .collection("medias")
+      .orderBy("createdAt", "desc")
+      .get();
+    queryData.forEach((snapshot) => userMedia.push(snapshot.data()));
+    return { sucess: true, medias: userMedia };
+  } catch (error) {
+    return { sucess: false, medias: [] };
   }
 };

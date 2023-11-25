@@ -1,12 +1,6 @@
 import React, { useCallback } from "react";
-import {
-  Text,
-  View,
-  Image,
-  FlatList,
-  TouchableOpacity,
-  ListRenderItem,
-} from "react-native";
+import { Text, View, Image, FlatList, TouchableOpacity } from "react-native";
+import { ResizeMode } from "expo-av";
 
 import { AntDesign } from "@expo/vector-icons";
 
@@ -14,7 +8,7 @@ import { PostModel } from "../../common/models/post";
 
 import SafeAreaWrapper from "../../components/safeAreaWrapper";
 import Loading from "../../components/loading";
-import PlayerVideo from "../../components/video";
+import PlayerVideo from "../../components/Player";
 
 import style from "./style";
 import COLORS from "../../common/constants/colors";
@@ -42,6 +36,7 @@ const ProfileView = () => {
                 url={item.mediaURL}
                 playInFullScreen={true}
                 shouldPlay={false}
+                resizeMode={ResizeMode.CONTAIN}
               />
               <View style={style.infoPost}>
                 <Text

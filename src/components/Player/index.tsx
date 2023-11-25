@@ -1,6 +1,7 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useCallback } from "react";
 import { TouchableOpacity, View } from "react-native";
-import { Video, ResizeMode } from "expo-av";
+import { useFocusEffect } from "@react-navigation/native";
+import { Video } from "expo-av";
 
 import { PlayerViewItem } from "./interfaces";
 
@@ -25,6 +26,14 @@ const PlayerVideo = ({ url, playInFullScreen, ...rest }: PlayerViewItem) => {
       videoRef.current.playAsync();
     }
   };
+
+  useFocusEffect(
+    useCallback(() => {
+      return () => {
+        videoRef.current?.pauseAsync();
+      };
+    }, [])
+  );
 
   return (
     <TouchableOpacity style={style.container} onPress={playVideo}>
@@ -51,7 +60,6 @@ const PlayerVideo = ({ url, playInFullScreen, ...rest }: PlayerViewItem) => {
         onLoadStart={() => setLoading(true)}
         onReadyForDisplay={() => setLoading(false)}
         onPlaybackStatusUpdate={(status) => setStatus(() => status)}
-        resizeMode={ResizeMode.COVER}
         style={style.video}
         useNativeControls={false}
       />

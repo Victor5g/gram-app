@@ -6,7 +6,7 @@ import { ProfileViewModel } from "./model";
 
 import { closeUserSession } from "../../repositories/auth.repository";
 import { getUserInfo, getUserID } from "../../repositories/user.respository";
-import { getAllMediaUser } from "../../repositories/media.repository";
+import { getAllMediaByUser } from "../../repositories/media.repository";
 
 const useProfileViewModel = (): ProfileViewModel => {
   const [name, setName] = useState<string>("");
@@ -27,7 +27,7 @@ const useProfileViewModel = (): ProfileViewModel => {
 
   const loadUserPosts = async () => {
     seLoading(true);
-    let response = await getAllMediaUser(getUserID());
+    let response = await getAllMediaByUser(getUserID());
     if (response.sucess) {
       setPosts(response.medias);
     }
