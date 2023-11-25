@@ -4,6 +4,7 @@ import { ResizeMode } from "expo-av";
 
 import SafeAreaWrapper from "../../components/safeAreaWrapper";
 import PlayerVideo from "../../components/Player";
+import Loading from "../../components/loading";
 
 import { AntDesign } from "@expo/vector-icons";
 
@@ -20,6 +21,7 @@ const FeedView = () => {
         <View style={style.header}>
           <Text style={style.title}>{"Feed"}</Text>
         </View>
+        <Loading loading={isLoading} >
         <FlatList
           data={posts}
           contentContainerStyle={{
@@ -70,6 +72,7 @@ const FeedView = () => {
             </View>
           )}
         />
+        </Loading>
       </View>
     </SafeAreaWrapper>
   );
