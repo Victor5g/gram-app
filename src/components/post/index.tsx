@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Text, View, Image, TouchableOpacity } from "react-native";
+import { Text, View, Image, TouchableOpacity, Share } from "react-native";
 import { ResizeMode } from "expo-av";
 
 import { FeedPostModel } from "../../common/models/feed";
@@ -22,6 +22,18 @@ const Post = ({ item }: { item: FeedPostModel }) => {
     let executed = await registerUserLike(!liked, item.id);
     if (executed) {
       setAmountLike(!liked ? amountLike + 1 : amountLike - 1);
+    }
+  };
+
+  const handleShare = async () => {
+    try {
+      await Share.share({
+        message: `Gram | ${item.title}\n\n${item.mediaURL}${
+          !item.mediaURL.includes(".mp4") && ".mp4"
+        }`,
+      });
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
@@ -64,7 +76,7 @@ const Post = ({ item }: { item: FeedPostModel }) => {
           <AntDesign name="message1" size={24} color="black" />
         </TouchableOpacity>
 
-        <TouchableOpacity style={style.actionButton}>
+        <TouchableOpacity style={style.actionButton} onPress={handleShare}>
           <AntDesign name="sharealt" size={24} color="black" />
         </TouchableOpacity>
       </View>
