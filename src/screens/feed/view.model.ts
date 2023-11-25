@@ -9,6 +9,7 @@ import { getUserInfoByID } from "../../repositories/user.respository";
 const useFeedViewModel = (): FeedViewModel => {
   const [posts, setPosts] = useState<Array<FeedPostModel>>([]);
 
+  const [intialLoading, setInitialLoading] = useState<boolean>(true);
   const [isLoading, seLoading] = useState<boolean>(false);
   const [lastCreatedAt, setLastCreatedAt] = useState<string | null>();
 
@@ -28,6 +29,7 @@ const useFeedViewModel = (): FeedViewModel => {
       }
     }
     seLoading(false);
+    intialLoading && setInitialLoading(false);
   };
 
   const joinInfoPost = async (posts: PostModel) => {
@@ -41,6 +43,7 @@ const useFeedViewModel = (): FeedViewModel => {
 
   return {
     isLoading,
+    intialLoading,
     posts,
     loadUserFeed,
   };

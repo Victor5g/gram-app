@@ -7,6 +7,7 @@ export interface FeedPostModel extends Omit<PostModel, "author"> {
 
 export interface FeedViewModel {
   isLoading: boolean;
+  intialLoading: boolean;
   posts: Array<FeedPostModel>;
   loadUserFeed: () => void;
 }
