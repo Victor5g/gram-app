@@ -9,6 +9,8 @@ import { AntDesign } from "@expo/vector-icons";
 
 import style from "./style";
 
+//  Agora e trazer os dados do usuario do video, adicinar funcionalidade compartilher comentar e curtir!
+
 import useFeedViewModel from "./view.model";
 
 const FeedView = () => {
@@ -32,12 +34,14 @@ const FeedView = () => {
               <View style={style.headerPost}>
                 <Image
                   source={{
-                    uri: "https://avatars.githubusercontent.com/u/51713169?v=4",
+                    uri: item.author.profilePhoto,
                   }}
                   style={style.headerImage}
                 />
                 <View style={style.infoUserPost}>
-                  <Text style={style.labelNameUser}>{"Victor Morramidy"}</Text>
+                  <Text style={style.labelNameUser}>
+                    {item.author.fullName}
+                  </Text>
                   <Text style={style.datePost}>
                     {new Date(item.createdAt).toDateString()}
                   </Text>

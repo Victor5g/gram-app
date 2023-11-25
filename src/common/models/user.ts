@@ -1,5 +1,5 @@
 export interface UserModel {
   email: string;
-  name: string;
+  fullName: string;
   profilePhoto: string;
 }

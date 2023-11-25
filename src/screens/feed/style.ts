@@ -11,6 +11,7 @@ import COLORS from "../../common/constants/colors";
 const style = StyleSheet.create({
   container: {
     flex: 1,
+    paddingTop: 10,
     paddingHorizontal: 10,
     alignItems: "center",
   },
@@ -20,6 +21,9 @@ const style = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    borderBottomWidth: 1,
+    paddingBottom: 10,
+    borderColor: COLORS.chineseSilver,
   },
   title: {
     fontSize: RFValue(23),
@@ -31,7 +35,7 @@ const style = StyleSheet.create({
     width: w(90),
     height: h(62),
     backgroundColor: COLORS.white,
-    borderWidth: 0.2,
+    borderWidth: Platform.OS === "ios" ? 0.2 : 1,
     borderColor: COLORS.primaryBlack,
     shadowColor: COLORS.primaryBlack,
     shadowOffset: { width: -2, height: 4 },

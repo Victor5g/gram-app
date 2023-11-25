@@ -6,7 +6,7 @@ import { UserModel } from "../common/models/user";
 export const getUserInfo = (): UserModel => {
   let info = auth().currentUser;
   return {
-    name: info.displayName,
+    fullName: info.displayName,
     email: info.email,
     profilePhoto: info.photoURL,
   };
@@ -21,7 +21,7 @@ export const getUserInfoByID = async (
   userId: string
 ): Promise<{
   sucess: boolean;
-  info: object | null;
+  data: object | null;
 }> => {
   try {
     let infoId = [];
@@ -30,8 +30,8 @@ export const getUserInfoByID = async (
       .where("userId", "==", userId)
       .get();
     queryData.forEach((snapshot) => infoId.push(snapshot.data()));
-    return { sucess: true, info: infoId };
+    return { sucess: true, data: infoId };
   } catch (error) {
-    return { sucess: false, info: null };
+    return { sucess: false, data: null };
   }
 };

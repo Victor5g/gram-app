@@ -20,7 +20,7 @@ const useProfileViewModel = (): ProfileViewModel => {
   const loadView = () => {
     const info: UserModel = getUserInfo();
     if (Object.keys(info).length > 0) {
-      setName(info.name);
+      setName(info.fullName);
       setUserURL(info.profilePhoto);
     }
   };
