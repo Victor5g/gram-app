@@ -65,14 +65,14 @@ const style = StyleSheet.create({
     marginTop: 20,
     borderRadius: 8,
     overflow: "hidden",
-    backgroundColor:COLORS.black
+    backgroundColor: COLORS.black,
   },
   contentAction: {
     width: "100%",
+    marginTop: 9,
     alignItems: "center",
     flexDirection: "row",
     justifyContent: "space-between",
-    marginVertical: 20,
     paddingHorizontal: 10,
   },
   actionButton: {
