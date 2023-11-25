@@ -12,6 +12,11 @@ const style = StyleSheet.create({
   container: {
     flex: 1,
   },
+  list: {
+    paddingTop: 25,
+    paddingBottom: 25,
+    alignItems: "center",
+  },
   header: {
     width: "100%",
     alignItems: "center",

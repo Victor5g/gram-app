@@ -66,11 +66,11 @@ const ProfileView = () => {
     <SafeAreaWrapper>
       <FlatList
         style={style.container}
-        contentContainerStyle={{
-          paddingTop: 25,
-          paddingBottom: 25,
-          alignItems: "center",
-        }}
+        contentContainerStyle={style.list}
+        initialNumToRender={1}
+        maxToRenderPerBatch={4}
+        data={posts}
+        renderItem={UserPosts}
         ListHeaderComponent={
           <View style={style.header}>
             <TouchableOpacity
@@ -106,10 +106,6 @@ const ProfileView = () => {
             <Text style={style.labelPost}>{"Your posts"}</Text>
           </View>
         }
-        data={posts}
-        initialNumToRender={1}
-        maxToRenderPerBatch={2}
-        renderItem={UserPosts}
       />
     </SafeAreaWrapper>
   );

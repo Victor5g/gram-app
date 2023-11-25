@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useLayoutEffect } from "react";
 
 import { PostModel } from "../../common/models/post";
 import { UserModel } from "../../common/models/user";
@@ -38,9 +38,9 @@ const useProfileViewModel = (): ProfileViewModel => {
     closeUserSession();
   };
 
-  useEffect(() => {
-    loadUserPosts();
+  useLayoutEffect(() => {
     loadView();
+    loadUserPosts();
   }, []);
 
   return {
