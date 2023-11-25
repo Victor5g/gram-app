@@ -2,7 +2,7 @@ import React, { useCallback } from "react";
 import { Text, View, FlatList, Image, TouchableOpacity } from "react-native";
 import { ResizeMode } from "expo-av";
 
-import { FeedPostModel } from "./model";
+import { FeedPostModel } from "../../common/models/feed";
 
 import SafeAreaWrapper from "../../components/safeAreaWrapper";
 import PlayerVideo from "../../components/Player";

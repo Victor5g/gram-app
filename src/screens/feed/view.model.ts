@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 
 import { PostModel } from "../../common/models/post";
-import { FeedViewModel, FeedPostModel } from "./model";
+import { FeedPostModel } from "../../common/models/feed";
+import { FeedViewModel } from "./model";
 
 import { getAllPostedMedia } from "../../repositories/media.repository";
 import { getUserInfoByID } from "../../repositories/user.respository";
