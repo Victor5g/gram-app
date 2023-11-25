@@ -63,6 +63,7 @@ export const registerMedia = async (
         fileType,
         mediaURL,
         createdAt,
+        like: 0,
       })
       .then((_) => {
         resolve(true);
@@ -105,9 +106,23 @@ export const getAllPostedMedia = async (
     }
     const userMedia = [];
     const queryData = await query.get();
-    queryData.forEach((snapshot) => userMedia.push(snapshot.data()));
+    queryData.forEach((snapshot) =>
+      userMedia.push({ ...snapshot.data(), id: snapshot.id })
+    );
     return { sucess: true, medias: userMedia };
   } catch (error) {
     return { sucess: false, medias: [] };
+  }
+};
+
+export const addLikePostMediaById = async (like: boolean, postId: string) => {
+  try {
+    const postRef = firestore().collection("medias").doc(postId);
+    await postRef.update({
+      like: firestore.FieldValue.increment(like ? 1 : -1),
+    });
+    return true;
+  } catch (error) {
+    return false;
   }
 };

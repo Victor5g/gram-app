@@ -76,6 +76,13 @@ const style = StyleSheet.create({
   },
   actionButton: {
     padding: 10,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  amountLike: {
+    fontSize: RFValue(10),
+    color: COLORS.black,
   },
 });
 

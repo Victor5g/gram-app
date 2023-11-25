@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, View, Image, TouchableOpacity } from "react-native";
 import { ResizeMode } from "expo-av";
 
@@ -9,8 +9,22 @@ import PlayerVideo from "../../components/player";
 import { AntDesign } from "@expo/vector-icons";
 
 import style from "./style";
+import COLORS from "../../common/constants/colors";
+
+import { addLikePostMediaById } from "../../repositories/media.repository";
 
 const Post = ({ item }: { item: FeedPostModel }) => {
+  const [liked, setLiked] = useState(false);
+  const [amountLike, setAmountLike] = useState(item.like || 0);
+
+  const handleLike = async () => {
+    setLiked(!liked);
+    let executed = await addLikePostMediaById(!liked, item.id);
+    if (executed) {
+      setAmountLike(!liked ? amountLike + 1 : amountLike - 1);
+    }
+  };
+
   return (
     <View style={style.contentPost}>
       <View style={style.headerPost}>
@@ -37,8 +51,13 @@ const Post = ({ item }: { item: FeedPostModel }) => {
         />
       </View>
       <View style={style.contentAction}>
-        <TouchableOpacity style={style.actionButton}>
-          <AntDesign name="like2" size={24} color="black" />
+        <TouchableOpacity style={style.actionButton} onPress={handleLike}>
+          <AntDesign
+            name={liked ? "like1" : "like2"}
+            size={24}
+            color={liked ? COLORS.secondary : COLORS.primaryBlack}
+          />
+          <Text style={style.amountLike}>{amountLike}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={style.actionButton}>
