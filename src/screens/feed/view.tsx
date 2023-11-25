@@ -1,14 +1,11 @@
 import React, { useCallback } from "react";
-import { Text, View, FlatList, Image, TouchableOpacity } from "react-native";
-import { ResizeMode } from "expo-av";
+import { Text, View, FlatList } from "react-native";
 
 import { FeedPostModel } from "../../common/models/feed";
 
 import SafeAreaWrapper from "../../components/safeAreaWrapper";
-import PlayerVideo from "../../components/Player";
+import Post from "../../components/post";
 import Loading from "../../components/loading";
-
-import { AntDesign } from "@expo/vector-icons";
 
 import style from "./style";
 
@@ -18,46 +15,7 @@ const FeedView = () => {
   const { isLoading, intialLoading, posts, loadUserFeed } = useFeedViewModel();
 
   const renderPost = useCallback(({ item }: { item: FeedPostModel }) => {
-    return (
-      <View style={style.contentPost}>
-        <View style={style.headerPost}>
-          <Image
-            source={{
-              uri: item.author.profilePhoto,
-            }}
-            style={style.headerImage}
-          />
-          <View style={style.infoUserPost}>
-            <Text style={style.labelNameUser}>{item.author.fullName}</Text>
-            <Text style={style.datePost}>
-              {new Date(item.createdAt).toDateString()}
-            </Text>
-          </View>
-        </View>
-        <Text style={style.titlePost}>{item.title}</Text>
-        <Text style={style.descriptionPost}>{item.description}</Text>
-        <View style={style.constntVideo}>
-          <PlayerVideo
-            url={item.mediaURL}
-            shouldPlay={false}
-            resizeMode={ResizeMode.CONTAIN}
-          />
-        </View>
-        <View style={style.contentAction}>
-          <TouchableOpacity style={style.actionButton}>
-            <AntDesign name="like2" size={24} color="black" />
-          </TouchableOpacity>
-
-          <TouchableOpacity style={style.actionButton}>
-            <AntDesign name="message1" size={24} color="black" />
-          </TouchableOpacity>
-
-          <TouchableOpacity style={style.actionButton}>
-            <AntDesign name="sharealt" size={24} color="black" />
-          </TouchableOpacity>
-        </View>
-      </View>
-    );
+    return <Post item={item} />;
   }, []);
 
   return (

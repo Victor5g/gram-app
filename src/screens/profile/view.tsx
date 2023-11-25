@@ -8,7 +8,7 @@ import { PostModel } from "../../common/models/post";
 
 import SafeAreaWrapper from "../../components/safeAreaWrapper";
 import Loading from "../../components/loading";
-import PlayerVideo from "../../components/Player";
+import PlayerVideo from "../../components/player";
 
 import style from "./style";
 import COLORS from "../../common/constants/colors";
