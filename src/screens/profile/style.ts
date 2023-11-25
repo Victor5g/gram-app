@@ -93,7 +93,7 @@ const style = StyleSheet.create({
     shadowRadius: 9.11,
     elevation: 14,
   },
-  constentItem: {
+  contentItem: {
     width: w(92),
     height: h(30),
     overflow: "hidden",

@@ -11,9 +11,11 @@ const useFeedViewModel = (): FeedViewModel => {
 
   const [intialLoading, setInitialLoading] = useState<boolean>(true);
   const [isLoading, seLoading] = useState<boolean>(false);
+  const [nextPage, setNextPage] = useState<boolean>(true);
   const [lastCreatedAt, setLastCreatedAt] = useState<string | null>();
 
   const loadUserFeed = async () => {
+    if (!nextPage) return;
     seLoading(true);
     let response = await getAllPostedMedia(lastCreatedAt);
     if (response.sucess) {
@@ -26,6 +28,8 @@ const useFeedViewModel = (): FeedViewModel => {
         );
         setPosts((oldPost) => [...oldPost, ...newPosts]);
         setLastCreatedAt(newPosts[newPosts.length - 1].createdAt);
+      } else {
+        setNextPage(false);
       }
     }
     seLoading(false);

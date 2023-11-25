@@ -15,6 +15,11 @@ const style = StyleSheet.create({
     paddingHorizontal: 10,
     alignItems: "center",
   },
+  listContent: {
+    gap: 40,
+    paddingTop: 30,
+    paddingBottom: 30,
+  },
   header: {
     paddingHorizontal: 12,
     width: "100%",
@@ -35,7 +40,7 @@ const style = StyleSheet.create({
     width: w(90),
     height: h(62),
     backgroundColor: COLORS.white,
-    borderWidth: Platform.OS === "ios" ? 0.2 : 1,
+    borderWidth: 0.3,
     borderColor: COLORS.primaryBlack,
     shadowColor: COLORS.primaryBlack,
     shadowOffset: { width: -2, height: 4 },

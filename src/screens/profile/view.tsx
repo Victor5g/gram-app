@@ -30,7 +30,7 @@ const ProfileView = () => {
     ({ item, index }: { item: PostModel; index: number }) => {
       return (
         <Loading loading={isLoading}>
-          <View key={"@C" + index} style={style.constentItem}>
+          <View key={"@C" + index} style={style.contentItem}>
             <View key={"@I" + index} style={style.item}>
               <PlayerVideo
                 url={item.mediaURL}
