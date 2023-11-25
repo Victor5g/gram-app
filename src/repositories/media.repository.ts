@@ -114,15 +114,3 @@ export const getAllPostedMedia = async (
     return { sucess: false, medias: [] };
   }
 };
-
-export const addLikePostMediaById = async (like: boolean, postId: string) => {
-  try {
-    const postRef = firestore().collection("medias").doc(postId);
-    await postRef.update({
-      like: firestore.FieldValue.increment(like ? 1 : -1),
-    });
-    return true;
-  } catch (error) {
-    return false;
-  }
-};

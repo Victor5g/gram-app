@@ -11,7 +11,7 @@ import { AntDesign } from "@expo/vector-icons";
 import style from "./style";
 import COLORS from "../../common/constants/colors";
 
-import { addLikePostMediaById } from "../../repositories/media.repository";
+import { registerUserLike } from "../../repositories/user.respository";
 
 const Post = ({ item }: { item: FeedPostModel }) => {
   const [liked, setLiked] = useState(false);
@@ -19,7 +19,7 @@ const Post = ({ item }: { item: FeedPostModel }) => {
 
   const handleLike = async () => {
     setLiked(!liked);
-    let executed = await addLikePostMediaById(!liked, item.id);
+    let executed = await registerUserLike(!liked, item.id);
     if (executed) {
       setAmountLike(!liked ? amountLike + 1 : amountLike - 1);
     }
