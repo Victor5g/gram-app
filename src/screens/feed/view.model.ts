@@ -10,19 +10,22 @@ const useFeedViewModel = (): FeedViewModel => {
   const [posts, setPosts] = useState<Array<FeedPostModel>>([]);
 
   const [isLoading, seLoading] = useState<boolean>(false);
+  const [lastCreatedAt, setLastCreatedAt] = useState<string | null>();
 
   const loadUserFeed = async () => {
     seLoading(true);
-    let response = await getAllPostedMedia();
+    let response = await getAllPostedMedia(lastCreatedAt);
     if (response.sucess) {
-      let newPosts = await Promise.all(
-        response.medias.map(async (post) => {
-          let infoPost = await joinInfoPost(post);
-          return { ...post, author: infoPost };
-        })
-      );
-      console.log("new-->", newPosts);
-      setPosts([...posts, ...newPosts]);
+      if (response.medias.length >= 1) {
+        let newPosts = await Promise.all(
+          response.medias.map(async (post) => {
+            let infoPost = await joinInfoPost(post);
+            return { ...post, author: infoPost };
+          })
+        );
+        setPosts((oldPost) => [...oldPost, ...newPosts]);
+        setLastCreatedAt(newPosts[newPosts.length - 1].createdAt);
+      }
     }
     seLoading(false);
   };
@@ -39,6 +42,7 @@ const useFeedViewModel = (): FeedViewModel => {
   return {
     isLoading,
     posts,
+    loadUserFeed,
   };
 };
 

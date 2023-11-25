@@ -9,12 +9,10 @@ import { AntDesign } from "@expo/vector-icons";
 
 import style from "./style";
 
-//  Agora e trazer os dados do usuario do video, adicinar funcionalidade compartilher comentar e curtir!
-
 import useFeedViewModel from "./view.model";
 
 const FeedView = () => {
-  const { isLoading, posts } = useFeedViewModel();
+  const { isLoading, posts, loadUserFeed } = useFeedViewModel();
 
   return (
     <SafeAreaWrapper>

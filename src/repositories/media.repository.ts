@@ -89,16 +89,22 @@ export const getAllMediaByUser = async (
   }
 };
 
-export const getAllPostedMedia = async (): Promise<{
+export const getAllPostedMedia = async (
+  lastCreatedAt?: string | null
+): Promise<{
   sucess: boolean;
   medias: Array<PostModel>;
 }> => {
   try {
-    const userMedia = [];
-    const queryData = await firestore()
+    let query = firestore()
       .collection("medias")
       .orderBy("createdAt", "desc")
-      .get();
+      .limit(2);
+    if (lastCreatedAt) {
+      query = query.startAfter(lastCreatedAt);
+    }
+    const userMedia = [];
+    const queryData = await query.get();
     queryData.forEach((snapshot) => userMedia.push(snapshot.data()));
     return { sucess: true, medias: userMedia };
   } catch (error) {
