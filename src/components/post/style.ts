@@ -60,11 +60,12 @@ const style = StyleSheet.create({
     fontWeight: "500",
     color: COLORS.quickSilver,
   },
-  constntVideo: {
+  contentVideo: {
     flex: 1,
     marginTop: 20,
     borderRadius: 8,
     overflow: "hidden",
+    backgroundColor:COLORS.black
   },
   contentAction: {
     width: "100%",

@@ -55,7 +55,7 @@ const Post = ({ item }: { item: FeedPostModel }) => {
       </View>
       <Text style={style.titlePost}>{item.title}</Text>
       <Text style={style.descriptionPost}>{item.description}</Text>
-      <View style={style.constntVideo}>
+      <View style={style.contentVideo}>
         <PlayerVideo
           url={item.mediaURL}
           shouldPlay={false}
