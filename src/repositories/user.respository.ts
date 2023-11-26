@@ -2,6 +2,7 @@ import auth from "@react-native-firebase/auth";
 import firestore from "@react-native-firebase/firestore";
 
 import { UserModel } from "../common/models/user";
+import { CommentModel } from "../common/models/comment";
 
 export const getUserInfo = (): UserModel => {
   let info = auth().currentUser;
@@ -45,5 +46,43 @@ export const registerUserLike = async (like: boolean, postId: string) => {
     return true;
   } catch (error) {
     return false;
+  }
+};
+
+export const registerUserComment = async ({
+  postId,
+  userId,
+  comment,
+}: CommentModel): Promise<boolean> => {
+  return new Promise((resolve, reject) => {
+    firestore()
+      .collection("comments")
+      .add({
+        postId,
+        userId,
+        comment,
+      })
+      .then((_) => {
+        resolve(true);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+};
+
+export const getUserComments = async (
+  postId: string
+): Promise<{ sucess: boolean; comments: Array<CommentModel> }> => {
+  try {
+    let query = firestore()
+      .collection("comments")
+      .where("postId", "==", postId);
+    const userMedia = [];
+    const queryData = await query.get();
+    queryData.forEach((snapshot) => userMedia.push(snapshot.data()));
+    return { sucess: true, comments: userMedia };
+  } catch (error) {
+    return { sucess: false, comments: [] };
   }
 };

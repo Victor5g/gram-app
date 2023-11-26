@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Text, View, Image, TouchableOpacity, Share } from "react-native";
+import { Text, View, Image, TouchableOpacity } from "react-native";
 import { ResizeMode } from "expo-av";
 
-import { FeedPostModel } from "../../common/models/feed";
+import { PropsPost } from "./interface";
 
 import PlayerVideo from "../../components/player";
 
@@ -11,30 +11,31 @@ import { AntDesign } from "@expo/vector-icons";
 import style from "./style";
 import COLORS from "../../common/constants/colors";
 
-import { registerUserLike } from "../../repositories/user.respository";
-
-const Post = ({ item }: { item: FeedPostModel }) => {
+const Post = ({
+  item,
+  onPressComment,
+  onPressShare,
+  onPressLike,
+}: PropsPost) => {
   const [liked, setLiked] = useState(false);
   const [amountLike, setAmountLike] = useState(item.like || 0);
 
-  const handleLike = async () => {
-    setLiked(!liked);
-    let executed = await registerUserLike(!liked, item.id);
-    if (executed) {
-      setAmountLike(!liked ? amountLike + 1 : amountLike - 1);
-    }
+  const actionLike = async () => {
+    onPressLike({
+      liked,
+      stateLiked: setLiked,
+      postId: item.id,
+      handleSucess: () =>
+        setAmountLike(!liked ? amountLike + 1 : amountLike - 1),
+    });
   };
 
-  const handleShare = async () => {
-    try {
-      await Share.share({
-        message: `Gram | ${item.title}\n\n${item.mediaURL}${
-          !item.mediaURL.includes(".mp4") && ".mp4"
-        }`,
-      });
-    } catch (error) {
-      console.log(error.message);
-    }
+  const actionShare = () => {
+    onPressShare(item);
+  };
+
+  const actionComment = () => {
+    onPressComment(item);
   };
 
   return (
@@ -63,7 +64,7 @@ const Post = ({ item }: { item: FeedPostModel }) => {
         />
       </View>
       <View style={style.contentAction}>
-        <TouchableOpacity style={style.actionButton} onPress={handleLike}>
+        <TouchableOpacity style={style.actionButton} onPress={actionLike}>
           <AntDesign
             name={liked ? "like1" : "like2"}
             size={24}
@@ -72,11 +73,11 @@ const Post = ({ item }: { item: FeedPostModel }) => {
           <Text style={style.amountLike}>{amountLike}</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={style.actionButton}>
+        <TouchableOpacity style={style.actionButton} onPress={actionComment}>
           <AntDesign name="message1" size={24} color="black" />
         </TouchableOpacity>
 
-        <TouchableOpacity style={style.actionButton} onPress={handleShare}>
+        <TouchableOpacity style={style.actionButton} onPress={actionShare}>
           <AntDesign name="sharealt" size={24} color="black" />
         </TouchableOpacity>
       </View>

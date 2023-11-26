@@ -3,7 +3,7 @@ import { TouchableOpacity, View } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { Video } from "expo-av";
 
-import { PlayerViewItem } from "./interfaces";
+import { PlayerViewItem } from "./interface";
 
 import { FontAwesome } from "@expo/vector-icons";
 
