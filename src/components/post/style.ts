@@ -81,7 +81,7 @@ const style = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  amountLike: {
+  infoAction: {
     fontSize: RFValue(10),
     color: COLORS.black,
   },

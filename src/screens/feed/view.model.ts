@@ -1,12 +1,13 @@
 import { useState, useEffect } from "react";
 import { Share } from "react-native";
 
-import { PostModel } from "../../common/models/post";
 import { FeedPostModel, FeedCommentModel } from "../../common/models/feed";
-import { CommentModel } from "../../common/models/comment";
 import { FeedViewModel, FeedLike } from "./model";
 
-import { getAllPostedMedia } from "../../repositories/media.repository";
+import {
+  getAllPostedMedia,
+  getAllCommentsMedia,
+} from "../../repositories/media.repository";
 import {
   getUserInfoByID,
   registerUserLike,
@@ -38,7 +39,8 @@ const useFeedViewModel = (): FeedViewModel => {
         let newPosts = await Promise.all(
           response.medias.map(async (post) => {
             let infoPost = await joinInfoUser(post.author);
-            return { ...post, author: infoPost };
+            let amount = await getAllCommentsMedia(post.id);
+            return { ...post, author: infoPost, amountComment: amount };
           })
         );
         setPosts((oldPost) => [...oldPost, ...newPosts]);

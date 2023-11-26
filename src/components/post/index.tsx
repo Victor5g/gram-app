@@ -70,11 +70,12 @@ const Post = ({
             size={24}
             color={liked ? COLORS.secondary : COLORS.primaryBlack}
           />
-          <Text style={style.amountLike}>{amountLike}</Text>
+          <Text style={style.infoAction}>{amountLike}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={style.actionButton} onPress={actionComment}>
           <AntDesign name="message1" size={24} color="black" />
+          <Text style={style.infoAction}>{item.amountComment}</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={style.actionButton} onPress={actionShare}>

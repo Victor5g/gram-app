@@ -114,3 +114,15 @@ export const getAllPostedMedia = async (
     return { sucess: false, medias: [] };
   }
 };
+
+export const getAllCommentsMedia = async (postId: string): Promise<number> => {
+  try {
+    let query = firestore()
+      .collection("comments")
+      .where("postId", "==", postId);
+    const queryData = await query.get();
+    return queryData.size;
+  } catch (error) {
+    return 0;
+  }
+};
