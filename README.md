@@ -19,9 +19,8 @@
 
 ## 🖼 GIF 
 <p align="center">
-<!--  <img src='https://user-images.githubusercontent.com/51713169/236983613-7d3eda35-c939-4368-9962-bd0fd670f33f.gif' width='345' />
- <img src='https://user-images.githubusercontent.com/51713169/236983845-e61cc9bd-33d1-468b-8594-cbf39af24e38.gif' width='330' /> -->
-
+ <img src='https://github.com/Victor5g/gram-app/assets/51713169/ca9d6c2a-31b0-4778-a825-35f5790f5158' width='345' />
+ <img src='https://github.com/Victor5g/gram-app/assets/51713169/f4df876a-a6ac-4306-ac7e-516105aafbeb' width='330' />
 </p>
 
 ## ✨ Technologies 
