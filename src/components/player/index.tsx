@@ -51,7 +51,7 @@ const PlayerVideo = ({ url, playInFullScreen, ...rest }: PlayerViewItem) => {
         {...rest}
         ref={videoRef}
         source={{
-          uri: /*url*/ "https://d23dyxeqlo5psv.cloudfront.net/big_buck_bunny.mp4",
+          uri: url,
         }}
         rate={1.0}
         volume={1.0}
