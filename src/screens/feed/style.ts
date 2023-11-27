@@ -1,4 +1,4 @@
-import { StyleSheet, Platform, Dimensions } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { RFValue } from "react-native-responsive-fontsize";
 
 import COLORS from "../../common/constants/colors";
@@ -85,7 +85,6 @@ const style = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 20,
   },
-  
 });
 
 export default style;
